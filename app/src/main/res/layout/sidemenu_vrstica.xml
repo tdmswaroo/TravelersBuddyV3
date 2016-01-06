@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="48dp"
+    >
+
+    <ImageView
+        android:id="@+id/ikona"
+        android:layout_width="@dimen/slikaSideMenu_width"
+        android:layout_height="@dimen/slikaSideMenu_height"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:contentDescription="Ikona"
+        android:layout_centerVertical="true"
+        android:scaleType="fitXY" />
+
+    <TextView
+        android:id="@+id/itemName"
+        android:layout_width="@dimen/sideMenuItemText_width"
+        android:layout_height="@dimen/sideMenuItemText_height"
+        android:layout_toRightOf="@id/ikona"
+        android:minHeight="?android:attr/listPreferredItemHeightSmall"
+        android:textAppearance="?android:attr/textAppearanceListItemSmall"
+        android:textColor="#ff000002"
+        android:textSize="@dimen/sideMenuItem_font_size"
+        android:gravity="center_vertical"
+        android:paddingRight="40dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+</RelativeLayout>
