@@ -10,4 +10,5 @@
     <dimen name="sideMenuItemText_width">150dp</dimen>
     <dimen name="ball_radius">30dp</dimen>
     <dimen name="sideMenuItem_font_size">20sp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 </resources>

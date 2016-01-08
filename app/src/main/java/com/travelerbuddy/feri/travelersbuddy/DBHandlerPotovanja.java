@@ -54,6 +54,7 @@ public class DBHandlerPotovanja extends AppCompatActivity {
             dbConnector.openConnection();
             mydb = dbConnector.getDB();
             result = mydb.rawQuery("SELECT * FROM potovanje_table",null);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
