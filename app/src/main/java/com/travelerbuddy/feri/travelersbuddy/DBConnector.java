@@ -23,8 +23,8 @@ public class DBConnector extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         //sqlite nima posebi datatipov za čas in datum, zato lahko shranjuje te podatke v tekst
         db.execSQL("CREATE TABLE "+TABLE_NAME1+"(ID INTEGER PRIMARY KEY AUTOINCREMENT,potovanjeOd TEXT,potovanjeDo TEXT,datumOdhoda TEXT,casPotovanja TEXT,tipPrevoza TEXT)");
-        db.execSQL("CREATE TABLE "+TABLE_NAME2+"(ID INTEGER PRIMARY KEY AUTOINCREMENT, naziv TEXT, createdOn TEXT, potovanje INTEGER, FOREIGN KEY(potovanje) REFERENCES "+TABLE_NAME1+"(ID)");
-        db.execSQL("CREATE TABLE "+TABLE_NAME3+"(ID INTEGER PRIMARY KEY AUTOINCREMENT, vsebina TEXT, checked INTEGER, kovcek INTEGER, FOREIGN KEY(kovcek) REFERENCES "+TABLE_NAME2+"(ID)");
+        db.execSQL("CREATE TABLE "+TABLE_NAME2+"(IDKOVCEK INTEGER PRIMARY KEY AUTOINCREMENT,naziv TEXT,createdOn TEXT,potovanje INTEGER,FOREIGN KEY(potovanje) REFERENCES "+TABLE_NAME1+"(ID))");
+        db.execSQL("CREATE TABLE "+TABLE_NAME3+"(IDITEM INTEGER PRIMARY KEY AUTOINCREMENT,vsebina TEXT,checked INTEGER,kovcek INTEGER,FOREIGN KEY(kovcek) REFERENCES "+TABLE_NAME2+"(IDKOVCEK))");
     }
 
     @Override

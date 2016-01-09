@@ -1,6 +1,7 @@
 package com.travelerbuddy.feri.travelersbuddy;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
@@ -12,22 +13,33 @@ public class DBHandlerNotes extends AppCompatActivity {
 
     DBConnector dbConnector;
     SQLiteDatabase mydb;
+    private Context context;
 
-    public boolean insertNote(String vsebina, int checked, int idPotovanje){
+    public DBHandlerNotes(){}
+    public DBHandlerNotes(Context context){this.context = context;}
+
+    public Context getContext() {
+        return context;
+    }
+    public void setContext(Context context) {
+        this.context = context;
+    }
+
+    public boolean insertNovKovcek(String naziv, String createdOn, int idPotovanje){
 
         boolean brezNapak = true;
-        dbConnector = new DBConnector(this);
+        dbConnector = new DBConnector(this.getContext());
 
         try{
             dbConnector.openConnection();
 
             mydb = dbConnector.getDB();
             ContentValues values = new ContentValues();
-            values.put("2",vsebina);
-            values.put("3",checked);
-            values.put("4",idPotovanje);
+            values.put("naziv",naziv);
+            values.put("createdOn",createdOn);
+            values.put("potovanje",idPotovanje);
 
-            long result = mydb.insert("belezka_table", null, values);
+            long result = mydb.insert("kovcek_table", null, values);
 
             if(result == -1)
                 brezNapak = false;
@@ -44,33 +56,33 @@ public class DBHandlerNotes extends AppCompatActivity {
     }
 
     public Cursor getAllNotes(){
-        dbConnector = new DBConnector(this);
+        dbConnector = new DBConnector(this.getContext());
         Cursor result = null;
 
         try {
 
             dbConnector.openConnection();
             mydb = dbConnector.getDB();
-            result = mydb.rawQuery("SELECT * FROM belezka_table",null);
+            result = mydb.rawQuery("SELECT * FROM kovcek_table",null);
 
         } catch (Exception e) {
             e.printStackTrace();
         }finally {
-            dbConnector.closeConnection();
+            //dbConnector.closeConnection();
         }
 
         return result;
     }
 
     public Cursor getAllNotesZaPotovanje(int idPotovanje){
-        dbConnector = new DBConnector(this);
+        dbConnector = new DBConnector(this.getContext());
         Cursor result = null;
 
         try {
 
             dbConnector.openConnection();
             mydb = dbConnector.getDB();
-            result = mydb.rawQuery("SELECT * FROM belezka_table WHERE potovanje="+idPotovanje,null);
+            result = mydb.rawQuery("SELECT * FROM kovcek_table WHERE potovanje="+idPotovanje,null);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -82,14 +94,14 @@ public class DBHandlerNotes extends AppCompatActivity {
     }
 
     public boolean checkNote(int idNote){
-        dbConnector = new DBConnector(this);
+        dbConnector = new DBConnector(this.getContext());
         boolean result = true;
 
         try {
 
             dbConnector.openConnection();
             mydb = dbConnector.getDB();
-            mydb.rawQuery("UPDATE belezka_table SET checked = 1 WHERE ID="+idNote,null);
+            mydb.rawQuery("UPDATE kovcek_items_table SET checked = 1 WHERE ID="+idNote,null);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -102,14 +114,14 @@ public class DBHandlerNotes extends AppCompatActivity {
     }
 
     public boolean unCheckNote(int idNote){
-        dbConnector = new DBConnector(this);
+        dbConnector = new DBConnector(this.getContext());
         boolean result = true;
 
         try {
 
             dbConnector.openConnection();
             mydb = dbConnector.getDB();
-            mydb.rawQuery("UPDATE belezka_table SET checked = 0 WHERE ID="+idNote,null);
+            mydb.rawQuery("UPDATE kovcek_items_table SET checked = 0 WHERE ID="+idNote,null);
 
         } catch (Exception e) {
             e.printStackTrace();
