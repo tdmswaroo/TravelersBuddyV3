@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="48dp"
+    >
+
+    <ImageView
+        android:id="@+id/ikonaValute2"
+        android:layout_width="@dimen/slikaValute_width"
+        android:layout_height="@dimen/slikaValute_height"
+        android:contentDescription="Ikona2"
+        android:layout_marginLeft="20dp"
+        android:layout_centerVertical="true"
+        android:scaleType="fitXY" />
+
+
+    <TextView
+        android:id="@+id/imeValute2"
+        android:layout_width="@dimen/imeValute_width"
+        android:layout_height="@dimen/imeValute_height"
+        android:minHeight="?android:attr/listPreferredItemHeightSmall"
+        android:textAppearance="?android:attr/textAppearanceListItemSmall"
+        android:textColor="#ff000002"
+        android:layout_toRightOf="@+id/ikonaValute2"
+        android:textSize="@dimen/sideMenuItem_font_size"
+        android:gravity="center"
+        android:paddingRight="5dp"
+        />
+
+
+
+</RelativeLayout>

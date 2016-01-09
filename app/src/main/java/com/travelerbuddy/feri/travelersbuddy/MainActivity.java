@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         items.add(new SideMenuItem(R.string.izbiraPoti, R.mipmap.ic_action));
         items.add(new SideMenuItem(R.string.prevozi, R.mipmap.car));
         items.add(new SideMenuItem(R.string.dogodki, R.mipmap.dogodki));
-        items.add(new SideMenuItem(R.string.belezka, R.mipmap.notepad));
+        items.add(new SideMenuItem(R.string.kovcek, R.mipmap.kovcek));
         items.add(new SideMenuItem(R.string.vreme, R.mipmap.vreme));
         items.add(new SideMenuItem(R.string.valuta, R.mipmap.valuta));
         items.add(new SideMenuItem(R.string.potov, R.mipmap.potov));
@@ -127,25 +127,25 @@ public class MainActivity extends AppCompatActivity {
 
         switch(position){
 
-            case 1:
+            case 0:
                 fragment = new IzbiraPotiFragment();
                 break;
-            case 2:
+            case 1:
                 //fragment = new PrevoziFragment();
                 break;
-            case 3:
+            case 2:
                 //fragment = new DogodkiFragment();
                 break;
-            case 4:
+            case 3:
                 //fragment = new BelezkaFragment();
                 break;
-            case 5:
+            case 4:
                 //fragment = new VremeFragment();
                 break;
-            case 6:
-                //fragment = new ValutaFragment();
+            case 5:
+                fragment = new ValuteFragment();
                 break;
-            case 7:
+            case 6:
                 //fragment = new MojaPotovanjaFragment();
                 break;
             default:
