@@ -12,7 +12,8 @@ public class DBConnector extends SQLiteOpenHelper {
     private SQLiteDatabase db;
     public static final String DATABASE_NAME = "travelBuddyApp.db";
     public static final String TABLE_NAME1 = "potovanje_table";
-    public static final String TABLE_NAME2 = "belezka_table";
+    public static final String TABLE_NAME2 = "kovcek_table";
+    public static final String TABLE_NAME3 = "kovcek_items_table";
 
     public DBConnector(Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -22,7 +23,8 @@ public class DBConnector extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         //sqlite nima posebi datatipov za čas in datum, zato lahko shranjuje te podatke v tekst
         db.execSQL("CREATE TABLE "+TABLE_NAME1+"(ID INTEGER PRIMARY KEY AUTOINCREMENT,potovanjeOd TEXT,potovanjeDo TEXT,datumOdhoda TEXT,casPotovanja TEXT,tipPrevoza TEXT)");
-        db.execSQL("CREATE TABLE "+TABLE_NAME2+"(ID INTEGER PRIMARY KEY AUTOINCREMENT, vsebina TEXT, checked INTEGER, potovanje INTEGER, FOREIGN KEY(potovanje) REFERENCES "+TABLE_NAME1+"(ID)");
+        db.execSQL("CREATE TABLE "+TABLE_NAME2+"(ID INTEGER PRIMARY KEY AUTOINCREMENT, naziv TEXT, createdOn TEXT, potovanje INTEGER, FOREIGN KEY(potovanje) REFERENCES "+TABLE_NAME1+"(ID)");
+        db.execSQL("CREATE TABLE "+TABLE_NAME3+"(ID INTEGER PRIMARY KEY AUTOINCREMENT, vsebina TEXT, checked INTEGER, kovcek INTEGER, FOREIGN KEY(kovcek) REFERENCES "+TABLE_NAME2+"(ID)");
     }
 
     @Override

@@ -13,9 +13,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -137,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
                 //fragment = new DogodkiFragment();
                 break;
             case 3:
-                //fragment = new BelezkaFragment();
+                fragment = new KovcekFragment();
                 break;
             case 4:
                 //fragment = new VremeFragment();
