@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
    private  ActionBarDrawerToggle mDrawerToggle;
    private SideMenuAdapter adapter;
    private Toolbar toolbar;
+   private WebView web;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,9 +40,12 @@ public class MainActivity extends AppCompatActivity {
         mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer);
         listview = (ListView)findViewById(android.R.id.list);
 
+
+
         List<SideMenuItem> items = new ArrayList<>();
         items.add(new SideMenuItem(R.string.izbiraPoti, R.mipmap.ic_action));
         items.add(new SideMenuItem(R.string.prevozi, R.mipmap.car));
+        items.add(new SideMenuItem(R.string.hoteli,R.mipmap.hoteli));
         items.add(new SideMenuItem(R.string.dogodki, R.mipmap.dogodki));
         items.add(new SideMenuItem(R.string.kovcek, R.mipmap.kovcek));
         items.add(new SideMenuItem(R.string.vreme, R.mipmap.vreme));
@@ -132,18 +137,21 @@ public class MainActivity extends AppCompatActivity {
                 //fragment = new PrevoziFragment();
                 break;
             case 2:
-                //fragment = new DogodkiFragment();
+                fragment = new HoteliFragment();
                 break;
             case 3:
-                fragment = new KovcekFragment();
+                //fragment = new DogodkiFragment();
                 break;
             case 4:
-                //fragment = new VremeFragment();
+                fragment = new KovcekFragment();
                 break;
             case 5:
-                fragment = new ValuteFragment();
+                //fragment = new VremeFragment();
                 break;
             case 6:
+                fragment = new ValuteFragment();
+                break;
+            case 7:
                 //fragment = new MojaPotovanjaFragment();
                 break;
             default:
@@ -162,6 +170,21 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
+    }
+
+
+    @Override
+    public void onBackPressed() {
+
+        web = (WebView) findViewById(R.id.webView);
+
+        if (web.copyBackForwardList().getCurrentIndex() > 0) {
+            web.goBack();
+        }
+        else {
+            // Your exit alert code, or alternatively line below to finish
+            super.onBackPressed(); // finishes activity
+        }
     }
 
 }

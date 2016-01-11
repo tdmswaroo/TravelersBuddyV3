@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TravelersBuddy</string>
+    <string name="app_name">TravelBuddy</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
@@ -8,6 +8,7 @@
 
     <string name="izbiraPoti">Izberi pot</string>
     <string name="prevozi">Prevozi</string>
+    <string name="hoteli">Hoteli</string>
     <string name="dogodki">Dogodki</string>
     <string name="vreme">Vreme</string>
     <string name="kovcek">Kovček</string>
@@ -15,11 +16,10 @@
     <string name="potov">Moja Potovanja</string>
 
 
-    <string-array name="valute">
-        <item>EUR</item>
-        <item>USD</item>
-        <item>GBP</item>
-    </string-array>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>
