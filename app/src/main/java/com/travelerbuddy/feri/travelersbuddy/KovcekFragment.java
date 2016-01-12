@@ -7,8 +7,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -28,6 +28,7 @@ public class KovcekFragment extends Fragment {
     EditText textAdd;
     ListView listView;
     ArrayAdapter<Kovcek> adapter;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -93,27 +94,29 @@ public class KovcekFragment extends Fragment {
                 kovcek.setIdPotovanja(Integer.parseInt(c.getString(c.getColumnIndex("potovanje"))));
 
                 kovcekLista.add(kovcek);
+
                 Log.d("Naziv kovčka: " + kovcek, "GET CHECK");
+
                 c.moveToNext();
             }
         }
         myDBNotes.dbConnector.closeConnection();
 
-
         listView = (ListView)view.findViewById(R.id.listaKovckov);
 
-        String[] stringi = new String[kovcekLista.size()];
-        for(int i = 0; i<kovcekLista.size();i++){
-            stringi[i]= kovcekLista.get(i).getId()+". "+kovcekLista.get(i).getNaziv()+" "+kovcekLista.get(i).getCreatedOn();
-        }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                this.getContext(),
-                android.R.layout.simple_list_item_1,
-                stringi);
 
+        ArrayAdapter<Kovcek> adapter = new ArrayAdapter<Kovcek>(this.getContext(),android.R.layout.simple_list_item_1,kovcekLista);
         listView.setAdapter(adapter);
-        ((BaseAdapter) listView.getAdapter()).notifyDataSetChanged();
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                int idKovcka = position + 1;
+                
+            }
+        });
 
         return view;
     }

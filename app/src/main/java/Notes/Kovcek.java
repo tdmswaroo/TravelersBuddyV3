@@ -51,6 +51,6 @@ public class Kovcek {
     }
 
     public String toString(){
-        return id + ", " + naziv + ", " + createdOn + ", " + idPotovanja;
+        return id + ". " + naziv + "   " + createdOn + "   Dodaj vsebino ";
     }
 }
