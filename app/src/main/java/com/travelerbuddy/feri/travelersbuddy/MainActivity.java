@@ -40,8 +40,6 @@ public class MainActivity extends AppCompatActivity {
         mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer);
         listview = (ListView)findViewById(android.R.id.list);
 
-
-
         List<SideMenuItem> items = new ArrayList<>();
         items.add(new SideMenuItem(R.string.izbiraPoti, R.mipmap.ic_action));
         items.add(new SideMenuItem(R.string.prevozi, R.mipmap.car));
@@ -88,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
         mDrawerToggle.syncState();
+
     }
 
     @Override
@@ -140,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
                 fragment = new HoteliFragment();
                 break;
             case 3:
-                //fragment = new DogodkiFragment();
+                fragment = new DogodkiFragment();
                 break;
             case 4:
                 fragment = new KovcekFragment();
