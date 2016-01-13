@@ -5,6 +5,7 @@ package com.travelerbuddy.feri.travelersbuddy;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
    private Toolbar toolbar;
    private WebView web;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
         items.add(new SideMenuItem(R.string.vreme, R.mipmap.vreme));
         items.add(new SideMenuItem(R.string.valuta, R.mipmap.valuta));
         items.add(new SideMenuItem(R.string.potov, R.mipmap.potov));
+
+
 
         adapter = new SideMenuAdapter(getApplicationContext(),items);
 
@@ -86,7 +90,9 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
         mDrawerToggle.syncState();
-
+        FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
+        tx.replace(R.id.content_frame, new IzbiraPotiFragment());
+        tx.commit();
     }
 
     @Override

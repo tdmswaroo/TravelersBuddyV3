@@ -28,12 +28,16 @@
             android:layout_height="50dp"
             android:layout_marginLeft="105dp"
             android:hint="Location"
+            android:singleLine="true"
+            android:nextFocusDown="@+id/mesci"
             android:imeOptions="actionNext">
         <requestFocus />
         </EditText>
 
         <Spinner
             android:id="@+id/mesci"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:layout_width="150dp"
             android:layout_marginLeft="105dp"
             android:layout_marginTop="20dp"
