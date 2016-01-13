@@ -12,10 +12,9 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
    private  ActionBarDrawerToggle mDrawerToggle;
    private SideMenuAdapter adapter;
    private Toolbar toolbar;
+   private WebView web;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +43,9 @@ public class MainActivity extends AppCompatActivity {
         List<SideMenuItem> items = new ArrayList<>();
         items.add(new SideMenuItem(R.string.izbiraPoti, R.mipmap.ic_action));
         items.add(new SideMenuItem(R.string.prevozi, R.mipmap.car));
+        items.add(new SideMenuItem(R.string.hoteli,R.mipmap.hoteli));
         items.add(new SideMenuItem(R.string.dogodki, R.mipmap.dogodki));
-        items.add(new SideMenuItem(R.string.belezka, R.mipmap.notepad));
+        items.add(new SideMenuItem(R.string.kovcek, R.mipmap.kovcek));
         items.add(new SideMenuItem(R.string.vreme, R.mipmap.vreme));
         items.add(new SideMenuItem(R.string.valuta, R.mipmap.valuta));
         items.add(new SideMenuItem(R.string.potov, R.mipmap.potov));
@@ -85,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
         mDrawerToggle.syncState();
+
     }
 
     @Override
@@ -127,23 +129,26 @@ public class MainActivity extends AppCompatActivity {
 
         switch(position){
 
-            case 1:
+            case 0:
                 fragment = new IzbiraPotiFragment();
                 break;
-            case 2:
+            case 1:
                 //fragment = new PrevoziFragment();
                 break;
+            case 2:
+                fragment = new HoteliFragment();
+                break;
             case 3:
-                //fragment = new DogodkiFragment();
+                fragment = new DogodkiFragment();
                 break;
             case 4:
-                //fragment = new BelezkaFragment();
+                fragment = new KovcekFragment();
                 break;
             case 5:
                 //fragment = new VremeFragment();
                 break;
             case 6:
-                //fragment = new ValutaFragment();
+                fragment = new ValuteFragment();
                 break;
             case 7:
                 //fragment = new MojaPotovanjaFragment();
@@ -164,6 +169,21 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
+    }
+
+
+    @Override
+    public void onBackPressed() {
+
+        web = (WebView) findViewById(R.id.webView);
+
+        if (web.copyBackForwardList().getCurrentIndex() > 0) {
+            web.goBack();
+        }
+        else {
+            // Your exit alert code, or alternatively line below to finish
+            super.onBackPressed(); // finishes activity
+        }
     }
 
 }

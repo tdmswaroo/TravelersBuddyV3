@@ -1,6 +1,7 @@
 package com.travelerbuddy.feri.travelersbuddy;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
@@ -12,21 +13,32 @@ public class DBHandlerPotovanja extends AppCompatActivity {
 
     DBConnector dbConnector;
     SQLiteDatabase mydb;
+    private Context context;
+
+    public DBHandlerPotovanja(){}
+    public DBHandlerPotovanja(Context context){this.context = context;}
+
+    public Context getContext() {
+        return context;
+    }
+    public void setContext(Context context) {
+        this.context = context;
+    }
 
     public boolean insertPotovanje(String potovanjeOd, String potovanjeDo, String datumOdhoda, String casPotovanja, String tipPrevoza){
         boolean brezNapak = true;
-        dbConnector = new DBConnector(this);
+        dbConnector = new DBConnector(this.getContext());
 
         try{
             dbConnector.openConnection();
 
             mydb = dbConnector.getDB();
             ContentValues values = new ContentValues();
-            values.put("2",potovanjeOd);
-            values.put("3",potovanjeDo);
-            values.put("4",datumOdhoda);
-            values.put("5",casPotovanja);
-            values.put("6",tipPrevoza);
+            values.put("potovanjeOd",potovanjeOd);
+            values.put("potovanjeDo",potovanjeDo);
+            values.put("datumOdhoda",datumOdhoda);
+            values.put("casPotovanja",casPotovanja);
+            values.put("tipPrevoza",tipPrevoza);
 
             long result = mydb.insert("potovanje_table", null, values);
 
@@ -46,7 +58,7 @@ public class DBHandlerPotovanja extends AppCompatActivity {
 
     public Cursor getAllPotovanja(){
 
-        dbConnector = new DBConnector(this);
+        dbConnector = new DBConnector(this.getContext());
         Cursor result = null;
 
         try {
@@ -54,6 +66,7 @@ public class DBHandlerPotovanja extends AppCompatActivity {
             dbConnector.openConnection();
             mydb = dbConnector.getDB();
             result = mydb.rawQuery("SELECT * FROM potovanje_table",null);
+
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -10,4 +10,17 @@
     <dimen name="sideMenuItemText_width">150dp</dimen>
     <dimen name="ball_radius">30dp</dimen>
     <dimen name="sideMenuItem_font_size">20sp</dimen>
+
+    <dimen name="slikaValute_height">35dp</dimen>
+    <dimen name="slikaValute_width">35dp</dimen>
+
+    <dimen name="imeValute_height">55dp</dimen>
+    <dimen name="imeValute_width">95dp</dimen>
+
+    <dimen name="swapValuta_height">55dp</dimen>
+    <dimen name="swapValuta_width">40dp</dimen>
+
+    <dimen name="spinner_height">80dp</dimen>
+    <dimen name="spinner_width">165dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 </resources>
