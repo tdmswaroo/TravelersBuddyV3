@@ -6,33 +6,47 @@
     <string name="drawer_open">Odprto</string>
     <string name="drawer_close">Zaprto</string>
 
-    <string name="izbiraPoti">Izberi pot</string>
-    <string name="prevozi">Prevozi</string>
-    <string name="hoteli">Hoteli</string>
-    <string name="dogodki">Dogodki</string>
-    <string name="vreme">Vreme</string>
-    <string name="kovcek">Kovček</string>
-    <string name="valuta">Valute</string>
-    <string name="potov">Moja Potovanja</string>
+    <string name="izbiraPoti">Choose route</string>
+    <string name="prevozi">Transport</string>
+    <string name="hoteli">Hotels</string>
+    <string name="dogodki">Events</string>
+    <string name="vreme">Weather</string>
+    <string name="kovcek">Suitcase</string>
+    <string name="valuta">Currencies</string>
+    <string name="potov">Last trips</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string-array name="mesci">
-        <item>Januar</item>
-        <item>Februar</item>
-        <item>Marec</item>
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
         <item>April</item>
-        <item>Maj</item>
-        <item>Junij</item>
-        <item>Julij</item>
-        <item>Avgust</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
         <item>September</item>
-        <item>Oktober</item>
+        <item>October</item>
         <item>November</item>
         <item>December</item>
-
     </string-array>
+
+    <string-array name="kategorija">
+        <item>All</item>
+        <item>Music</item>
+        <item>Conference</item>
+        <item>Comedy</item>
+        <item>For family</item>
+        <item>Movie</item>
+        <item>Atractions</item>
+        <item>Sports</item>
+        <item>Technology</item>
+        <item>Other</item>
+    </string-array>
+
+    <string name="title_activity_dogodki">DogodkiActivity</string>
 
 </resources>

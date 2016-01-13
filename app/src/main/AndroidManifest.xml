@@ -17,6 +17,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".DogodkiActivity"
+            android:label="@string/title_activity_dogodki"
+            android:theme="@style/MyMaterialTheme"></activity>
     </application>
 
 </manifest>
