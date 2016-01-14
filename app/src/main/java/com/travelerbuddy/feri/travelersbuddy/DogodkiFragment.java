@@ -1,16 +1,21 @@
 package com.travelerbuddy.feri.travelersbuddy;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 
 public class DogodkiFragment extends Fragment {
@@ -36,6 +41,19 @@ public class DogodkiFragment extends Fragment {
         vnosLokacije = (EditText) view.findViewById(R.id.vnosLokacijeDogodkov);
         mesci = (Spinner) view.findViewById(R.id.mesci);
         kategorije = (Spinner) view.findViewById(R.id.kategorija);
+
+        vnosLokacije.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_NEXT) {
+                    hideKeyboard();
+                    vnosLokacije.clearFocus();
+                    mesci.requestFocus();
+                    mesci.performClick();
+                }
+                return true;
+            }
+        });
 
         kategorije.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -91,5 +109,11 @@ public class DogodkiFragment extends Fragment {
             default:
                 return "";
         }
+    }
+
+    private void hideKeyboard() {
+        InputMethodManager inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(),
+                InputMethodManager.HIDE_NOT_ALWAYS);
     }
 }
