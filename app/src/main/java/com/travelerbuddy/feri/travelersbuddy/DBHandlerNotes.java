@@ -74,6 +74,25 @@ public class DBHandlerNotes extends AppCompatActivity {
         return result;
     }
 
+    public Cursor getNoteById(int id){
+        dbConnector = new DBConnector(this.getContext());
+        Cursor result = null;
+
+        try {
+
+            dbConnector.openConnection();
+            mydb = dbConnector.getDB();
+            result = mydb.rawQuery("SELECT * FROM kovcek_table WHERE IDKOVCEK="+id,null);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            //dbConnector.closeConnection();
+        }
+
+        return result;
+    }
+
     public Cursor getAllNotesZaPotovanje(int idPotovanje){
         dbConnector = new DBConnector(this.getContext());
         Cursor result = null;

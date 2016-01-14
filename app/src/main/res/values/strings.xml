@@ -48,5 +48,6 @@
     </string-array>
 
     <string name="title_activity_dogodki">DogodkiActivity</string>
+    <string name="title_activity_kovcek_items">kovcek_items</string>
 
 </resources>

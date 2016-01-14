@@ -24,7 +24,7 @@
         android:layout_width="192dp"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Dodaj nov kovček:"
+        android:text="Add new suitcase:"
         android:id="@+id/dodajNoviKovcekText"
         android:layout_gravity="left|top"
         android:textSize="22dp"

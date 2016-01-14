@@ -1,7 +1,9 @@
 package com.travelerbuddy.feri.travelersbuddy;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,7 +15,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -29,13 +30,13 @@ public class KovcekFragment extends Fragment {
     ListView listView;
     ArrayAdapter<Kovcek> adapter;
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
 
-        View view = inflater.inflate(R.layout.fragment_kovcek, container, false);
+        final View view = inflater.inflate(R.layout.fragment_kovcek, container, false);
+
 
         DBConnector connect = new DBConnector(this.getContext());
         final DBHandlerNotes myDBNotes = new DBHandlerNotes();
@@ -55,15 +56,15 @@ public class KovcekFragment extends Fragment {
                 if (text.getVisibility() == View.VISIBLE) {
                     text.setVisibility(View.INVISIBLE);
                     textAdd.setVisibility(View.VISIBLE);
-                    dodajKovcek.setText("Ok");
+                    dodajKovcek.setText("Add");
+                    dodajKovcek.setTextSize(16);
                 } else if ((!textAdd.getText().toString().equals("")) && (text.getVisibility() == View.INVISIBLE)) {
 
                     Calendar c = Calendar.getInstance();
                     int day = c.get(Calendar.DAY_OF_MONTH);
                     int month = c.get(Calendar.MONTH);
                     int year = c.get(Calendar.YEAR);
-                    boolean worked = true;
-
+                    boolean worked = false;
                     try {
                         worked = myDBNotes.insertNovKovcek(textAdd.getText().toString(), day + "." + (month+1) + "." + year, 1);
                     } catch (Exception e) {
@@ -75,7 +76,9 @@ public class KovcekFragment extends Fragment {
                     dodajKovcek.setText("+");
 
                     if (worked == true) {
-                        Toast.makeText(getContext(), "Kovček dodan", Toast.LENGTH_LONG).show();
+                        Snackbar.make(view, "Suitcase added.", Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).show();
+                        KovcekFragment.this.refresh(new KovcekFragment());
                     }
                 }
 
@@ -114,12 +117,18 @@ public class KovcekFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 int idKovcka = position + 1;
-                
+                Intent i = new Intent(getActivity().getApplicationContext(),kovcek_items.class);
+                i.putExtra("id",String.valueOf(idKovcka));
+                startActivity(i);
             }
         });
 
         return view;
     }
 
+    public void refresh(Fragment refr){
+        getFragmentManager().beginTransaction().replace(R.id.content_frame, refr).commit();
+        System.out.println("Refreshan fragment");
+    }
 
 }
