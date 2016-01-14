@@ -107,8 +107,6 @@ public class KovcekFragment extends Fragment {
 
         listView = (ListView)view.findViewById(R.id.listaKovckov);
 
-
-
         ArrayAdapter<Kovcek> adapter = new ArrayAdapter<Kovcek>(this.getContext(),android.R.layout.simple_list_item_1,kovcekLista);
         listView.setAdapter(adapter);
 

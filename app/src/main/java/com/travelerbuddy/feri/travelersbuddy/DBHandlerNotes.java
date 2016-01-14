@@ -55,6 +55,36 @@ public class DBHandlerNotes extends AppCompatActivity {
 
     }
 
+    public boolean insertNovItem(String vsebina, String checked, int idKovcek){
+
+        boolean brezNapak = true;
+        dbConnector = new DBConnector(this.getContext());
+
+        try{
+            dbConnector.openConnection();
+
+            mydb = dbConnector.getDB();
+            ContentValues values = new ContentValues();
+            values.put("vsebina",vsebina);
+            values.put("checked",checked);
+            values.put("kovcek",idKovcek);
+
+            long result = mydb.insert("kovcek_items_table", null, values);
+
+            if(result == -1)
+                brezNapak = false;
+
+        }catch (Exception e){
+            brezNapak = false;
+            e.printStackTrace();
+        }finally {
+            //dbConnector.closeConnection();
+        }
+
+        return brezNapak;
+
+    }
+
     public Cursor getAllNotes(){
         dbConnector = new DBConnector(this.getContext());
         Cursor result = null;
@@ -107,6 +137,25 @@ public class DBHandlerNotes extends AppCompatActivity {
             e.printStackTrace();
         }finally {
             dbConnector.closeConnection();
+        }
+
+        return result;
+    }
+
+    public Cursor getAllItemsZaKovcek(int idKovcek){
+        dbConnector = new DBConnector(this.getContext());
+        Cursor result = null;
+
+        try {
+
+            dbConnector.openConnection();
+            mydb = dbConnector.getDB();
+            result = mydb.rawQuery("SELECT * FROM kovcek_items_table WHERE IDITEM="+idKovcek,null);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            //dbConnector.closeConnection();
         }
 
         return result;
