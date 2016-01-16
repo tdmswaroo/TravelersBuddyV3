@@ -13,18 +13,21 @@ import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import Notes.Kovcek;
 import Notes.KovcekItem;
+import Notes.KovcekItemAdapter;
 import Pomozni.DogodekItem;
 
-public class kovcek_items extends AppCompatActivity {
+public class kovcek_items extends AppCompatActivity {//implements android.widget.CompoundButton.OnCheckedChangeListener{
 
     private static final int DIALOG_ALERT = 10;
 
@@ -37,6 +40,17 @@ public class kovcek_items extends AppCompatActivity {
     EditText input = null;
     private String dialog_Text = "";
 
+    ArrayAdapter<KovcekItem> adapter = null;
+
+    DBConnector connect = new DBConnector(this);
+    final DBHandlerNotes myDBNotes = new DBHandlerNotes();
+
+    KovcekItemAdapter dataAdapter = null;
+    ArrayList<KovcekItem> kovcekItemsLista = null;
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +59,6 @@ public class kovcek_items extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbarD);
         setSupportActionBar(toolbar);
 
-        final DBHandlerNotes myDBNotes = new DBHandlerNotes();
         myDBNotes.setContext(this);
 
         String idKovcka = getIntent().getStringExtra("id");
@@ -61,7 +74,7 @@ public class kovcek_items extends AppCompatActivity {
                 kovcek.setIdPotovanja(Integer.parseInt(c.getString(c.getColumnIndex("potovanje"))));
 
                 Log.d("Naziv kovčka: " + kovcek, "GET CHECK");
-                c.moveToNext();
+                break;
             }
         }
 
@@ -69,38 +82,56 @@ public class kovcek_items extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
-        final ArrayList<KovcekItem> kovcekItemsLista = new ArrayList<>();
+
+
+        //*******************************************************************************************************
+
+
+
         Cursor c1 = myDBNotes.getAllItemsZaKovcek(Integer.parseInt(getIntent().getStringExtra("id")));
 
-        if (c1 .moveToFirst()) {
-            while (c1.isAfterLast() == false) {
-                KovcekItem item = new KovcekItem();
-                item.setId(Integer.parseInt(c1.getString(c1.getColumnIndex("IDITEM"))));
-                item.setVsebina(c1.getString(c1.getColumnIndex("vsebina")));
-                item.setChecked(c1.getString(c1.getColumnIndex("checked")));
-                item.setIdKovcka(Integer.parseInt(c1.getString(c1.getColumnIndex("kovcek"))));
+        this.displayListView(c1);
 
-                kovcekItemsLista.add(item);
-                System.out.println(item);
-
-                Log.d("Naziv kovčka: " + kovcek, "GET CHECK");
-
-                c.moveToNext();
-            }
-        }
         myDBNotes.dbConnector.closeConnection();
-        try {
-            listView = (ListView) findViewById(R.id.listViewItems);
-            ArrayAdapter<KovcekItem> adapter = new ArrayAdapter<KovcekItem>(this, android.R.layout.simple_list_item_1, kovcekItemsLista);
-            listView.setAdapter(adapter);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
 
         alertDialog = (Button)findViewById(R.id.dodajNoviItemButton);
         alertDialog.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 showDialog(DIALOG_ALERT);
+            }
+        });
+
+    }
+
+    private void displayListView(Cursor c){
+        kovcekItemsLista = new ArrayList<KovcekItem>();
+        KovcekItem item = null;
+        if (c.moveToFirst()) {
+            while (c.isAfterLast() == false) {
+                item = new KovcekItem();
+                item.setId(Integer.parseInt(c.getString(c.getColumnIndex("IDITEM"))));
+                item.setVsebina(c.getString(c.getColumnIndex("vsebina")));
+                item.setSelected(Boolean.valueOf(c.getString(c.getColumnIndex("checked"))));
+                item.setIdKovcka(Integer.parseInt(c.getString(c.getColumnIndex("kovcek"))));
+
+                kovcekItemsLista.add(item);
+                Log.d("Naziv itema: " + item, "GET CHECK");
+                c.moveToNext();
+            }
+        }
+        dataAdapter = new KovcekItemAdapter(this,R.layout.item_vrstica, kovcekItemsLista);
+        ListView listView = (ListView) findViewById(R.id.listViewItems);
+        listView.setAdapter(dataAdapter);
+
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                // When clicked, show a toast with the TextView text
+                KovcekItem country = (KovcekItem) parent.getItemAtPosition(position);
+                Toast.makeText(getApplicationContext(),
+                        "Clicked on Row: " + country.getVsebina(),
+                        Toast.LENGTH_LONG).show();
             }
         });
 
@@ -140,10 +171,9 @@ public class kovcek_items extends AppCompatActivity {
 
             String dialog_Text = input.getText().toString();
 
-            DBHandlerNotes db = new DBHandlerNotes();
             boolean res = false;
             try {
-                res = db.insertNovItem("NEKAJ", "false", Integer.parseInt(getIntent().getStringExtra("id")));
+                res = myDBNotes.insertNovItem(dialog_Text, "false", Integer.parseInt(getIntent().getStringExtra("id")));
                 if(res == true) {
                     Snackbar.make(findViewById(android.R.id.content), "Item inserted.", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
@@ -154,7 +184,7 @@ public class kovcek_items extends AppCompatActivity {
             } catch (Exception e) {
                 Log.d("NEKAJ JE NAROBE", "CHECK");
             }finally {
-                //dbConnector.closeConnection();
+                myDBNotes.dbConnector.closeConnection();
             }
         }
     }
@@ -162,3 +192,4 @@ public class kovcek_items extends AppCompatActivity {
 
 
 }
+

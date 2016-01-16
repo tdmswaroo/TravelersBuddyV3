@@ -51,5 +51,6 @@
     <string name="title_activity_dogodki">DogodkiActivity</string>
     <string name="title_activity_kovcek_items">kovcek_items</string>
     <string name="title_activity_dogodek_podrobno">DogodekPodrobno</string>
+    <string name="title_activity_test">test</string>
 
 </resources>
