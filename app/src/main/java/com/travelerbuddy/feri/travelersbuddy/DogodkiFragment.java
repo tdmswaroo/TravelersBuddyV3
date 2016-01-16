@@ -87,24 +87,22 @@ public class DogodkiFragment extends Fragment {
     public String dolociKat(int position) {
         switch (position) {
             case 0:
-                return "";
-            case 1:
                 return "music";
-            case 2:
+            case 1:
                 return "conference";
-            case 3:
+            case 2:
                 return "comedy";
-            case 4:
+            case 3:
                 return "family_fun_kids";
-            case 5:
+            case 4:
                 return "movies_film";
-            case 6:
+            case 5:
                 return "attractions";
-            case 7:
+            case 6:
                 return "sports";
-            case 8:
+            case 7:
                 return "technology";
-            case 9:
+            case 8:
                 return "other";
             default:
                 return "";

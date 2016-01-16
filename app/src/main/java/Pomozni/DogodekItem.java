@@ -1,14 +1,16 @@
 package Pomozni;
 
+import java.io.Serializable;
+
 /**
  * Created by Nino on 13-Jan-16.
  */
-public class DogodekItem {
+public class DogodekItem implements Serializable{
 
     private String naziv;
     private String lokacija;
     private String datum;
-    private String slikaDogodka;
+    private int slikaDogodka;
     private String opisDogodka;
     private String ime_prizorisca;
     private int ikonaDatum;
@@ -16,7 +18,7 @@ public class DogodekItem {
 
     public DogodekItem(){}
 
-    public DogodekItem(String naziv, String lokacija, String datum, String slikaDogodka, String opisDogodka, String ime_prizorisca, int ikonaDatum, int ikonaLokacija) {
+    public DogodekItem(String naziv, String lokacija, String datum, int slikaDogodka, String opisDogodka, String ime_prizorisca, int ikonaDatum, int ikonaLokacija) {
         this.naziv = naziv;
         this.lokacija = lokacija;
         this.datum = datum;
@@ -27,11 +29,11 @@ public class DogodekItem {
         this.ikonaLokacija = ikonaLokacija;
     }
 
-    public String getSlikaDogodka() {
+    public int getSlikaDogodka() {
         return slikaDogodka;
     }
 
-    public void setSlikaDogodka(String slikaDogodka) {
+    public void setSlikaDogodka(int slikaDogodka) {
         this.slikaDogodka = slikaDogodka;
     }
 

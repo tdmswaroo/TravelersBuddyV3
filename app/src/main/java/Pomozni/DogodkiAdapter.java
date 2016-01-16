@@ -1,6 +1,8 @@
 package Pomozni;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,13 +37,14 @@ public class DogodkiAdapter extends ListViewAdapter{
             viewHolder.lokacija = (TextView)view.findViewById(R.id.textLokacijaDogodka);
             viewHolder.ikonaDatum = (ImageView)view.findViewById(R.id.dogodekDatum);
             viewHolder.datum = (TextView)view.findViewById(R.id.textDatumDogodka);
-
+            viewHolder.slikaDogodka = (ImageView) view.findViewById(R.id.slikaDogodka);
             view.setTag(viewHolder);
         }
 
         ViewHolder viewHolder = (ViewHolder)view.getTag();
         DogodekItem item = (DogodekItem) getTypedItem(position);
         viewHolder.imeDogodka.setText(item.getNaziv());
+        viewHolder.slikaDogodka.setImageResource(item.getSlikaDogodka());
         viewHolder.lokacija.setText(item.getLokacija());
         viewHolder.datum.setText(item.getDatum());
 
@@ -54,6 +57,7 @@ public class DogodkiAdapter extends ListViewAdapter{
         TextView imeDogodka;
         ImageView ikonaLokacija;
         ImageView ikonaDatum;
+        ImageView slikaDogodka;
 
     }
 

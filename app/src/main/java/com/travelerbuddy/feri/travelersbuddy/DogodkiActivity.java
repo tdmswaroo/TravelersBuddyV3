@@ -1,6 +1,7 @@
 package com.travelerbuddy.feri.travelersbuddy;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -10,7 +11,9 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -32,7 +35,7 @@ public class DogodkiActivity extends AppCompatActivity {
     private ListView listView;
     ArrayList<DogodekItem> seznam = new ArrayList<DogodekItem>();
     private Context context = this;
-
+int slika = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,10 +50,22 @@ public class DogodkiActivity extends AppCompatActivity {
         String kategorija = getIntent().getStringExtra("kat");
 
         String url = "http://api.eventful.com/json/events/search?app_key=kp7d9fDLcD4FC495&location" +
-                "="+lokacija + "&date="+mesec+"&category="+kategorija+"&image_sizes=large&page_size=20";
+                "=" + lokacija + "&date=" + mesec + "&category=" + kategorija + "&image_sizes=large&page_size=20";
 
-        new PrikazDogodkov().execute(url);
+        new PrikazDogodkov().execute(url, kategorija);
+        listView = (ListView) findViewById(R.id.dogodkiListView);
 
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent i = new Intent(context,DogodekPodrobno.class);
+                DogodekItem d =(DogodekItem)parent.getItemAtPosition(position);
+                Bundle extras = new Bundle();
+                extras.putSerializable("dogodek",d);
+                i.putExtras(extras);
+                startActivity(i);
+            }
+        });
     }
 
     private class PrikazDogodkov extends AsyncTask<String, Void, ArrayList<DogodekItem>> {
@@ -99,17 +114,13 @@ public class DogodkiActivity extends AppCompatActivity {
                 JSONObject events = (JSONObject) jsonObject.get("events");
                 JSONArray listDogodkov = (JSONArray) events.get("event");
 
-                String slika = "";
+                String kat = urlStr[1];
+
+                dolociSliko(kat);
+
                 for(int i=0; i<listDogodkov.length(); i++){
 
 
-                    if(listDogodkov.getJSONObject(i).has("image") && listDogodkov.getJSONObject(i).isNull("image")){
-                    }else{
-                        JSONObject image = (JSONObject) listDogodkov.getJSONObject(i).getJSONObject("image");
-
-                        JSONObject large = (JSONObject) image.getJSONObject("large");
-                        slika = large.getString("url");
-                    }
 
                     seznam.add(new DogodekItem(
                             listDogodkov.getJSONObject(i).getString("title"),
@@ -133,8 +144,6 @@ public class DogodkiActivity extends AppCompatActivity {
 
         protected void onPostExecute(ArrayList<DogodekItem> seznam) {
 
-
-            listView = (ListView) findViewById(R.id.dogodkiListView);
             listView.setAdapter(new DogodkiAdapter(context, seznam));
 
         }
@@ -148,5 +157,43 @@ public class DogodkiActivity extends AppCompatActivity {
             onBackPressed();
         }
         return super.onOptionsItemSelected(menuItem);
+    }
+    public int dolociSliko(String kat) {
+        switch (kat) {
+            case "music":
+                    slika = R.mipmap.music;
+                break;
+            case "conference":
+                slika = R.mipmap.conference;
+                break;
+            case  "comedy":
+                slika = R.mipmap.comedy;
+                break;
+            case  "family_fun_kids":
+                slika = R.mipmap.fam;
+                break;
+            case  "movies_film":
+                slika = R.mipmap.movie;
+                break;
+            case  "attractions":
+                slika = R.mipmap.atractions;
+                break;
+            case  "sports":
+                slika = R.mipmap.sports;
+                break;
+            case  "technology":
+                slika = R.mipmap.tech;
+                break;
+            case  "other":
+                slika = R.mipmap.koledar;
+                break;
+            case "":
+                slika = R.mipmap.koledar;
+                break;
+            default:
+                slika = R.mipmap.koledar;
+                break;
+        }
+        return 0;
     }
 }
