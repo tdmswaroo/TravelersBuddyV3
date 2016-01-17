@@ -7,39 +7,38 @@ public class KovcekItem {
 
     private int id;
     private String vsebina;
-    private String checked;
+    private boolean selected = false;
     private int idKovcka;
 
     public KovcekItem(){}
-    public KovcekItem(int id, String vsebina, String checked, int idKovcka){
+    public KovcekItem(int id, String vsebina, boolean selected, int idKovcka){
+        super();
         this.id = id;
         this.vsebina = vsebina;
-        this.checked = checked;
+        this.selected = selected;
         this.idKovcka = idKovcka;
     }
 
-    public int getId() {
+    public int getId(){
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int id){
+        this.id=id;
     }
 
     public String getVsebina() {
         return vsebina;
     }
-
     public void setVsebina(String vsebina) {
         this.vsebina = vsebina;
     }
 
-    public String isChecked() {
-        return checked;
+    public boolean isSelected() {
+        return selected;
     }
-
-    public void setChecked(String checked) {
-        this.checked = checked;
+    public void setSelected(boolean selected) {
+        this.selected = selected;
     }
 
     public int getIdKovcka() {
@@ -48,10 +47,6 @@ public class KovcekItem {
 
     public void setIdKovcka(int idKovcka) {
         this.idKovcka = idKovcka;
-    }
-
-    public String toString(){
-        return id + ", " + vsebina + ", " + checked + ", " + idKovcka;
     }
 
 }

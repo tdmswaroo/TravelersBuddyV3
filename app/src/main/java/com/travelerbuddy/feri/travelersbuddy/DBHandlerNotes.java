@@ -150,7 +150,7 @@ public class DBHandlerNotes extends AppCompatActivity {
 
             dbConnector.openConnection();
             mydb = dbConnector.getDB();
-            result = mydb.rawQuery("SELECT * FROM kovcek_items_table WHERE IDITEM="+idKovcek,null);
+            result = mydb.rawQuery("SELECT * FROM kovcek_items_table WHERE kovcek="+idKovcek,null);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -169,7 +169,7 @@ public class DBHandlerNotes extends AppCompatActivity {
 
             dbConnector.openConnection();
             mydb = dbConnector.getDB();
-            mydb.rawQuery("UPDATE kovcek_items_table SET checked = 1 WHERE ID="+idNote,null);
+            mydb.rawQuery("UPDATE kovcek_items_table SET checked = 'TRUE' WHERE IDITEM='"+idNote+"'",null);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -189,7 +189,7 @@ public class DBHandlerNotes extends AppCompatActivity {
 
             dbConnector.openConnection();
             mydb = dbConnector.getDB();
-            mydb.rawQuery("UPDATE kovcek_items_table SET checked = 0 WHERE ID="+idNote,null);
+            mydb.rawQuery("UPDATE kovcek_items_table SET checked = 'FALSE' WHERE ID='"+idNote+"'",null);
 
         } catch (Exception e) {
             e.printStackTrace();
