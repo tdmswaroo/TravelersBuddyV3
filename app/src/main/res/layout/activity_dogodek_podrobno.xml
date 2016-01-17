@@ -16,17 +16,18 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="220dp"
+        android:layout_height="130dp"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="5dp"
             android:layout_marginTop="5dp"
             android:id="@+id/naslovPodrobnosti"
             android:textStyle="bold"
+            android:text="Naslov"
             android:textColor="@color/navigationBarColor"
             android:textSize="20dp"
             />
@@ -76,15 +77,30 @@
 
         </LinearLayout>
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginTop="10dp"
-            android:id="@+id/opis"
-            android:textStyle="italic"
-            />
+            android:layout_height="20dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/link"
+                android:src="@mipmap/link"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="5dp"
+                />
+
+            <TextView
+                android:id="@+id/povezavaDogodka"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:textSize="@dimen/textLokDogodka"
+                android:text="Link to event"
+                android:layout_marginLeft="5dp"
+                />
+
+        </LinearLayout>
+
     </LinearLayout>
 
     <fragment

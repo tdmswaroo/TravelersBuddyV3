@@ -127,8 +127,9 @@ int slika = 0;
                             listDogodkov.getJSONObject(i).get("venue_name").toString()+", "+listDogodkov.getJSONObject(i).getString("city_name"),
                             listDogodkov.getJSONObject(i).getString("start_time"),
                             slika,
-                            listDogodkov.getJSONObject(i).get("description").toString(),
-                            listDogodkov.getJSONObject(i).get("venue_address").toString(),
+                            listDogodkov.getJSONObject(i).get("url").toString(),
+                            listDogodkov.getJSONObject(i).get("latitude").toString(),
+                            listDogodkov.getJSONObject(i).get("longitude").toString(),
                             R.mipmap.koledar,
                             R.mipmap.lokac
                     ));
