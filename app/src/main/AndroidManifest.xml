@@ -14,7 +14,9 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/MyMaterialTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,14 +25,17 @@
         </activity>
         <activity
             android:name=".DogodkiActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_dogodki"
             android:theme="@style/MyMaterialTheme" />
         <activity
             android:name=".kovcek_items"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_kovcek_items"
             android:theme="@style/MyMaterialTheme" />
         <activity
             android:name=".DogodekPodrobno"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_dogodek_podrobno"
             android:theme="@style/MyMaterialTheme" />
 

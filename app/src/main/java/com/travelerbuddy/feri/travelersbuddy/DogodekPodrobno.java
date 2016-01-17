@@ -97,7 +97,7 @@ public class DogodekPodrobno extends AppCompatActivity implements OnMapReadyCall
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
         map.addMarker(new MarkerOptions().position(new LatLng(latitudeDogodka, longitudeDogodka)).title("Event venue"));
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latitudeDogodka, longitudeDogodka), 15));
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latitudeDogodka, longitudeDogodka), 10));
 
 
     }
@@ -117,10 +117,6 @@ public class DogodekPodrobno extends AppCompatActivity implements OnMapReadyCall
         map.addMarker(new MarkerOptions().position(new LatLng(location.getLatitude(), location.getLongitude()))
                 .title("Your position")
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
-
-
-
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latitudeDogodka, longitudeDogodka), 15));
 
 
     }
