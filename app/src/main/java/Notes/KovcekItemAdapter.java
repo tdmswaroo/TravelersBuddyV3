@@ -1,5 +1,6 @@
 package Notes;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
@@ -43,30 +44,42 @@ public class KovcekItemAdapter extends ArrayAdapter<KovcekItem> {
         if (convertView == null) {
             LayoutInflater vi = LayoutInflater.from(getContext());
             convertView = vi.inflate(R.layout.item_vrstica, null);
+            final DBHandlerNotes myDBNotes = new DBHandlerNotes(convertView.getContext());
 
             holder = new ViewHolder();
             holder.code = (TextView) convertView.findViewById(R.id.code);
             holder.name = (CheckBox) convertView.findViewById(R.id.checkBox1);
             convertView.setTag(holder);
 
-            holder.name.setOnClickListener( new View.OnClickListener() {
+            holder.name.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    CheckBox cb = (CheckBox) v ;
+                    CheckBox cb = (CheckBox) v;
                     KovcekItem country = (KovcekItem) cb.getTag();
-                    final DBHandlerNotes myDBNotes = new DBHandlerNotes();
-                    myDBNotes.setContext(v.getContext());
+                    //System.out.println("Item checked: " + country.getId() + " " + country.isSelected());
 
-                    boolean r = myDBNotes.checkNote(country.getId());
+                    long r;
+                    if (cb.isChecked()) {
+                        country.setSelected(cb.isChecked());
+                        ContentValues cv = new ContentValues();
+                        cv.put("checked", country.isSelected());
+                        r = myDBNotes.checkNote(country.getId(), cv);
+                        System.out.println("Check update: " + country.isSelected());
+                    } else {
+                        country.setSelected(false);
+                        ContentValues cv = new ContentValues();
+                        cv.put("checked", country.isSelected());
+                        r = myDBNotes.unCheckNote(country.getId(), cv);
+                        System.out.println("Check update1: " + country.isSelected());
+                    }
 
-                    if(r == true) {
+                    if (r == 1) {
                         Snackbar.make(v, "Checked: " + country.getVsebina(), Snackbar.LENGTH_LONG)
                                 .setAction("Action", null).show();
-                    }else{
+                    } else {
                         Snackbar.make(v, "Something went wrong.", Snackbar.LENGTH_LONG)
                                 .setAction("Action", null).show();
                     }
 
-                    country.setSelected(cb.isChecked());
                 }
             });
         }

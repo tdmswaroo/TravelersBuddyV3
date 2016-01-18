@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 /**
  * Created by Asura on 08-Jan-16.
@@ -161,41 +162,64 @@ public class DBHandlerNotes extends AppCompatActivity {
         return result;
     }
 
-    public boolean checkNote(int idNote){
+    public long checkNote(int idNote, ContentValues values){
         dbConnector = new DBConnector(this.getContext());
-        boolean result = true;
+        int result = 0;
 
         try {
 
             dbConnector.openConnection();
             mydb = dbConnector.getDB();
-            mydb.rawQuery("UPDATE kovcek_items_table SET checked = 'TRUE' WHERE IDITEM='"+idNote+"'",null);
-
+            mydb.execSQL("UPDATE kovcek_items_table SET checked = 'true' WHERE IDITEM = " + idNote);
+            Log.d("CheckNote", String.valueOf(values));
+            result = 1;
         } catch (Exception e) {
+            result = 0;
             e.printStackTrace();
-            result = false;
         }finally {
-            dbConnector.closeConnection();
+            //dbConnector.close();
         }
 
         return result;
     }
 
-    public boolean unCheckNote(int idNote){
+    public long unCheckNote(int idNote, ContentValues values){
         dbConnector = new DBConnector(this.getContext());
-        boolean result = true;
+        long result = 0;
 
         try {
 
             dbConnector.openConnection();
             mydb = dbConnector.getDB();
-            mydb.rawQuery("UPDATE kovcek_items_table SET checked = 'FALSE' WHERE ID='"+idNote+"'",null);
+            mydb.execSQL("UPDATE kovcek_items_table SET checked = 'false' WHERE IDITEM = "+idNote);
+            Log.d("UnCheckNote", String.valueOf(values));
+            result = 1;
+        } catch (Exception e) {
+            result = 0;
+            e.printStackTrace();
+        }finally {
+            //dbConnector.close();
+        }
 
+        return result;
+    }
+
+    public long updateItem(int idNote, String vsebina){
+        dbConnector = new DBConnector(this.getContext());
+        long result = 0;
+
+        try {
+
+            dbConnector.openConnection();
+            mydb = dbConnector.getDB();
+            mydb.execSQL("UPDATE kovcek_items_table SET vsebina = '"+vsebina+"' WHERE IDITEM = "+idNote);
+            Log.d("UpdateNote", vsebina);
+            result = 1;
         } catch (Exception e) {
             e.printStackTrace();
-            result = false;
+            result = 0;
         }finally {
-            dbConnector.closeConnection();
+            //dbConnector.close();
         }
 
         return result;
