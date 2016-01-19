@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import Notes.Kovcek;
+import Notes.KovcekAdapter;
+import Notes.KovcekPotovanje;
 
 
 public class KovcekFragment extends Fragment {
@@ -85,20 +87,23 @@ public class KovcekFragment extends Fragment {
             }
         });
 
-        final ArrayList<Kovcek> kovcekLista = new ArrayList<>();
+        final ArrayList<KovcekPotovanje> kovcekLista = new ArrayList<>();
         Cursor c = myDBNotes.getAllNotes();
 
         if (c .moveToFirst()) {
             while (c.isAfterLast() == false) {
-                Kovcek kovcek = new Kovcek();
+                KovcekPotovanje kovcek = new KovcekPotovanje();
                 kovcek.setId(Integer.parseInt(c.getString(c.getColumnIndex("IDKOVCEK"))));
                 kovcek.setNaziv(c.getString(c.getColumnIndex("naziv")));
                 kovcek.setCreatedOn(c.getString(c.getColumnIndex("createdOn")));
                 kovcek.setIdPotovanja(Integer.parseInt(c.getString(c.getColumnIndex("potovanje"))));
+                kovcek.setPotovanjeOD(c.getString(c.getColumnIndex("potovanjeOd")));
+                kovcek.setPotovanjeDO(c.getString(c.getColumnIndex("potovanjeDo")));
+                kovcek.setDatumOdhoda(c.getString(c.getColumnIndex("datumOdhoda")));
 
                 kovcekLista.add(kovcek);
 
-                Log.d("Naziv kovčka: " + kovcek, "GET CHECK");
+                Log.d("Naziv kovčka: " + kovcek.getNaziv() + ", " + kovcek.getIdPotovanja() + ", " + kovcek.getPotovanjeOD()+ " " + kovcek.getPotovanjeDO(), "GET CHECK");
 
                 c.moveToNext();
             }
@@ -107,8 +112,7 @@ public class KovcekFragment extends Fragment {
 
         listView = (ListView)view.findViewById(R.id.listaKovckov);
 
-        ArrayAdapter<Kovcek> adapter = new ArrayAdapter<Kovcek>(this.getContext(),android.R.layout.simple_list_item_1,kovcekLista);
-        listView.setAdapter(adapter);
+        listView.setAdapter(new KovcekAdapter(view.getContext(), kovcekLista));
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 

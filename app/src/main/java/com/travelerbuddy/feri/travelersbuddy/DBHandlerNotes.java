@@ -94,6 +94,25 @@ public class DBHandlerNotes extends AppCompatActivity {
 
             dbConnector.openConnection();
             mydb = dbConnector.getDB();
+            result = mydb.rawQuery("SELECT * FROM kovcek_table k, potovanje_table p WHERE k.potovanje = 1",null);//morem sql tak napisat da bo vračal še število itemov, ki so v kovčku :)
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            //dbConnector.closeConnection();
+        }
+
+        return result;
+    }
+/*
+    public Cursor getAllNotesWithTripId(int tripId){
+        dbConnector = new DBConnector(this.getContext());
+        Cursor result = null;
+
+        try {
+
+            dbConnector.openConnection();
+            mydb = dbConnector.getDB();
             result = mydb.rawQuery("SELECT * FROM kovcek_table",null);
 
         } catch (Exception e) {
@@ -104,7 +123,7 @@ public class DBHandlerNotes extends AppCompatActivity {
 
         return result;
     }
-
+*/
     public Cursor getNoteById(int id){
         dbConnector = new DBConnector(this.getContext());
         Cursor result = null;
