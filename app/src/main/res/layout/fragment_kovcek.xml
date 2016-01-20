@@ -10,8 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="492dp"
         android:id="@+id/listaKovckov"
-        android:layout_gravity="left|bottom"
-        android:paddingTop="45dp" />
+        android:layout_gravity="left|bottom"/>
 
 
 </FrameLayout>

@@ -22,7 +22,6 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-import Notes.Kovcek;
 import Notes.KovcekItem;
 import Notes.KovcekItemAdapter;
 import Pomozni.DogodekItem;
@@ -65,23 +64,11 @@ public class kovcek_items extends AppCompatActivity {//implements android.widget
         myDBNotes.setContext(this);
 
         String idKovcka = getIntent().getStringExtra("id");
+        String naziv = getIntent().getStringExtra("nazivKovcka");
         System.out.println(idKovcka);
-        Cursor c = myDBNotes.getNoteById(Integer.parseInt(idKovcka));
-        Kovcek kovcek = null;
-        if (c .moveToFirst()) {
-            while (c.isAfterLast() == false) {
-                kovcek = new Kovcek();
-                kovcek.setId(Integer.parseInt(c.getString(c.getColumnIndex("IDKOVCEK"))));
-                kovcek.setNaziv(c.getString(c.getColumnIndex("naziv")));
-                kovcek.setCreatedOn(c.getString(c.getColumnIndex("createdOn")));
-                kovcek.setIdPotovanja(Integer.parseInt(c.getString(c.getColumnIndex("potovanje"))));
 
-                Log.d("Naziv kovčka: " + kovcek, "GET CHECK");
-                break;
-            }
-        }
 
-        getSupportActionBar().setTitle("Add items to: " + kovcek.getNaziv());
+        getSupportActionBar().setTitle("Add items to: " + naziv);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 

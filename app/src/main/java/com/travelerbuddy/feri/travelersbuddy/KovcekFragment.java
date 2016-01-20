@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -20,7 +21,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
 import Notes.Kovcek;
 import Notes.KovcekAdapter;
@@ -37,12 +37,18 @@ public class KovcekFragment extends Fragment {
 
     View celotni_view;
     DBHandlerNotes mybdNotes = null;
+    private static final int DIALOG_ALERT = 10;
+
+    private ArrayList<KovcekPotovanje> kovcekLista = null;
+    DBConnector connect = new DBConnector(this.getContext());
+    final DBHandlerNotes myDBNotes = new DBHandlerNotes();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -52,12 +58,12 @@ public class KovcekFragment extends Fragment {
         final View view = inflater.inflate(R.layout.fragment_kovcek, container, false);
         celotni_view = view;
 
-        DBConnector connect = new DBConnector(this.getContext());
-        final DBHandlerNotes myDBNotes = new DBHandlerNotes();
         myDBNotes.setContext(this.getContext());
         mybdNotes = myDBNotes;
 
-        final ArrayList<KovcekPotovanje> kovcekLista = new ArrayList<>();
+        //myDBNotes.deleteAllKovcekAndItems();
+
+        kovcekLista = new ArrayList<>();
         Cursor c = myDBNotes.getAllNotes();
 
         if (c .moveToFirst()) {
@@ -78,7 +84,6 @@ public class KovcekFragment extends Fragment {
                 c.moveToNext();
             }
         }
-        myDBNotes.dbConnector.closeConnection();
 
         listView = (ListView)view.findViewById(R.id.listaKovckov);
 
@@ -89,8 +94,23 @@ public class KovcekFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 int idKovcka = position + 1;
+                Cursor c = myDBNotes.getNoteById(idKovcka);
+                Kovcek kovcek = new Kovcek();;
+                if (c .moveToFirst()) {
+                    while (c.isAfterLast() == false) {
+                        kovcek.setId(Integer.parseInt(c.getString(c.getColumnIndex("IDKOVCEK"))));
+                        kovcek.setNaziv(c.getString(c.getColumnIndex("naziv")));
+                        kovcek.setCreatedOn(c.getString(c.getColumnIndex("createdOn")));
+                        kovcek.setIdPotovanja(Integer.parseInt(c.getString(c.getColumnIndex("potovanje"))));
+
+                        Log.d("Naziv kovčka za id: " + kovcek, "GET CHECK");
+                        break;
+                    }
+                }
+                myDBNotes.dbConnector.closeConnection();
                 Intent i = new Intent(getActivity().getApplicationContext(),kovcek_items.class);
                 i.putExtra("id",String.valueOf(idKovcka));
+                i.putExtra("nazivKovcka", kovcek.getNaziv());
                 startActivity(i);
             }
         });
@@ -111,37 +131,20 @@ public class KovcekFragment extends Fragment {
             case R.id.action_add:
                 Log.d("Sem v on clicku", "CHECK");
 
+                FragmentManager fm = getFragmentManager();
+                dialog dialogFragment = new dialog ();
+                dialogFragment.show(fm, "Sample Fragment");
 
 
-                if ((!textAdd.getText().toString().equals("")) && (text.getVisibility() == View.INVISIBLE)) {
-
-                    Calendar c = Calendar.getInstance();
-                    int day = c.get(Calendar.DAY_OF_MONTH);
-                    int month = c.get(Calendar.MONTH);
-                    int year = c.get(Calendar.YEAR);
-                    boolean worked = false;
-                    try {
-                        worked = mybdNotes.insertNovKovcek(textAdd.getText().toString(), day + "." + (month+1) + "." + year, 1);
-                    } catch (Exception e) {
-                        Log.d("NEKAJ JE NAROBE", "CHECK");
-                    }
-
-                    text.setVisibility(View.VISIBLE);
-                    textAdd.setVisibility(View.INVISIBLE);
-                    dodajKovcek.setText("+");
-
-                    if (worked == true) {
-                        Snackbar.make(celotni_view, "Suitcase added.", Snackbar.LENGTH_LONG)
-                                .setAction("Action", null).show();
-                        KovcekFragment.this.refresh(new KovcekFragment());
-                    }
-                }
                 Snackbar.make(celotni_view, "True on menu item!", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+                //KovcekFragment.this.refresh(new KovcekFragment());
                 return true;
             default:
+
                 return super.onOptionsItemSelected(item);
         }
+
     }
 
     public void refresh(Fragment refr){

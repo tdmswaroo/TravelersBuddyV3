@@ -94,7 +94,7 @@ public class DBHandlerNotes extends AppCompatActivity {
 
             dbConnector.openConnection();
             mydb = dbConnector.getDB();
-            result = mydb.rawQuery("SELECT * FROM kovcek_table k, potovanje_table p WHERE k.potovanje = 1",null);//morem sql tak napisat da bo vračal še število itemov, ki so v kovčku :)
+            result = mydb.rawQuery("SELECT * FROM kovcek_table k, potovanje_table p",null);//morem sql tak napisat da bo vračal še število itemov, ki so v kovčku :)
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -233,6 +233,49 @@ public class DBHandlerNotes extends AppCompatActivity {
             mydb = dbConnector.getDB();
             mydb.execSQL("UPDATE kovcek_items_table SET vsebina = '"+vsebina+"' WHERE IDITEM = "+idNote);
             Log.d("UpdateNote", vsebina);
+            result = 1;
+        } catch (Exception e) {
+            e.printStackTrace();
+            result = 0;
+        }finally {
+            //dbConnector.close();
+        }
+
+        return result;
+    }
+
+    public long deleteKovcekAndItems(int idNote){
+        dbConnector = new DBConnector(this.getContext());
+        long result = 0;
+
+        try {
+
+            dbConnector.openConnection();
+            mydb = dbConnector.getDB();
+            mydb.execSQL("DELETE FROM kovcek_items_table WHERE IDITEM = " + idNote);
+
+            result = 1;
+        } catch (Exception e) {
+            e.printStackTrace();
+            result = 0;
+        }finally {
+            //dbConnector.close();
+        }
+
+        return result;
+    }
+
+    public long deleteAllKovcekAndItems(){
+        dbConnector = new DBConnector(this.getContext());
+        long result = 0;
+
+        try {
+
+            dbConnector.openConnection();
+            mydb = dbConnector.getDB();
+            mydb.execSQL("DELETE FROM kovcek_items_table");
+            mydb.execSQL("DELETE FROM kovcek_table");
+            Log.d("ERASE ALL", "ALL ERASED I SUPPOSE");
             result = 1;
         } catch (Exception e) {
             e.printStackTrace();

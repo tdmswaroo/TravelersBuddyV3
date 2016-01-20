@@ -69,4 +69,6 @@ public class Potovanje {
     public void setTipPrevoza(String tipPrevoza) {
         this.tipPrevoza = tipPrevoza;
     }
+
+    public String toString(){return this.getId() + " " + this.getPotovanjeOD()+" - "+this.getPotovanjeDO();}
 }

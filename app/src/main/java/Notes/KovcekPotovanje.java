@@ -79,4 +79,8 @@ public class KovcekPotovanje {
     public void setDatumOdhoda(String datumOdhoda) {
         this.datumOdhoda = datumOdhoda;
     }
+
+    public String toString (){
+        return this.getPotovanjeOD()+" - "+this.getPotovanjeDO();
+    }
 }
