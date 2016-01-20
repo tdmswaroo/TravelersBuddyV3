@@ -6,49 +6,12 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <Button
-        android:layout_width="53dp"
-        android:layout_height="wrap_content"
-        android:text="+"
-        android:id="@+id/dodajNoviKovcekButton"
-        android:layout_gravity="right|top"
-        android:textSize="35dp"
-        android:textColor="#ffffff"
-        android:layout_marginRight="50dp"
-        android:layout_marginTop="10dp"
-        android:background="#ff9917"
-        android:focusable="true"
-        android:textStyle="normal" />
-
-    <TextView
-        android:layout_width="192dp"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Add new suitcase:"
-        android:id="@+id/dodajNoviKovcekText"
-        android:layout_gravity="left|top"
-        android:textSize="22dp"
-        android:textStyle="normal"
-        android:textAlignment="center"
-        android:textIsSelectable="false"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="30dp" />
-
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="492dp"
         android:id="@+id/listaKovckov"
         android:layout_gravity="left|bottom"
         android:paddingTop="45dp" />
-
-    <EditText
-        android:layout_width="229dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/dodajKovcekEdit"
-        android:layout_gravity="left|top"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="15dp"
-        android:visibility="invisible" />
 
 
 </FrameLayout>

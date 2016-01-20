@@ -7,6 +7,9 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -32,60 +35,27 @@ public class KovcekFragment extends Fragment {
     ListView listView;
     ArrayAdapter<Kovcek> adapter;
 
+    View celotni_view;
+    DBHandlerNotes mybdNotes = null;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
 
         final View view = inflater.inflate(R.layout.fragment_kovcek, container, false);
-
+        celotni_view = view;
 
         DBConnector connect = new DBConnector(this.getContext());
         final DBHandlerNotes myDBNotes = new DBHandlerNotes();
         myDBNotes.setContext(this.getContext());
-
-        //final DBHandlerPotovanja myDBPotovanja = new DBHandlerPotovanja(this.getContext());
-        //myDBPotovanja.setContext(this.getContext());
-
-        text = (TextView)view.findViewById(R.id.dodajNoviKovcekText);
-        textAdd = (EditText)view.findViewById(R.id.dodajKovcekEdit);
-
-        dodajKovcek = (Button)view.findViewById(R.id.dodajNoviKovcekButton);
-        dodajKovcek.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("Sem v on clicku", "CHECK");
-                if (text.getVisibility() == View.VISIBLE) {
-                    text.setVisibility(View.INVISIBLE);
-                    textAdd.setVisibility(View.VISIBLE);
-                    dodajKovcek.setText("Add");
-                    dodajKovcek.setTextSize(16);
-                } else if ((!textAdd.getText().toString().equals("")) && (text.getVisibility() == View.INVISIBLE)) {
-
-                    Calendar c = Calendar.getInstance();
-                    int day = c.get(Calendar.DAY_OF_MONTH);
-                    int month = c.get(Calendar.MONTH);
-                    int year = c.get(Calendar.YEAR);
-                    boolean worked = false;
-                    try {
-                        worked = myDBNotes.insertNovKovcek(textAdd.getText().toString(), day + "." + (month+1) + "." + year, 1);
-                    } catch (Exception e) {
-                        Log.d("NEKAJ JE NAROBE", "CHECK");
-                    }
-
-                    text.setVisibility(View.VISIBLE);
-                    textAdd.setVisibility(View.INVISIBLE);
-                    dodajKovcek.setText("+");
-
-                    if (worked == true) {
-                        Snackbar.make(view, "Suitcase added.", Snackbar.LENGTH_LONG)
-                                .setAction("Action", null).show();
-                        KovcekFragment.this.refresh(new KovcekFragment());
-                    }
-                }
-
-            }
-        });
+        mybdNotes = myDBNotes;
 
         final ArrayList<KovcekPotovanje> kovcekLista = new ArrayList<>();
         Cursor c = myDBNotes.getAllNotes();
@@ -126,6 +96,52 @@ public class KovcekFragment extends Fragment {
         });
 
         return view;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(
+            Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_itemdetail, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // handle item selection
+        switch (item.getItemId()) {
+            case R.id.action_add:
+                Log.d("Sem v on clicku", "CHECK");
+
+
+
+                if ((!textAdd.getText().toString().equals("")) && (text.getVisibility() == View.INVISIBLE)) {
+
+                    Calendar c = Calendar.getInstance();
+                    int day = c.get(Calendar.DAY_OF_MONTH);
+                    int month = c.get(Calendar.MONTH);
+                    int year = c.get(Calendar.YEAR);
+                    boolean worked = false;
+                    try {
+                        worked = mybdNotes.insertNovKovcek(textAdd.getText().toString(), day + "." + (month+1) + "." + year, 1);
+                    } catch (Exception e) {
+                        Log.d("NEKAJ JE NAROBE", "CHECK");
+                    }
+
+                    text.setVisibility(View.VISIBLE);
+                    textAdd.setVisibility(View.INVISIBLE);
+                    dodajKovcek.setText("+");
+
+                    if (worked == true) {
+                        Snackbar.make(celotni_view, "Suitcase added.", Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).show();
+                        KovcekFragment.this.refresh(new KovcekFragment());
+                    }
+                }
+                Snackbar.make(celotni_view, "True on menu item!", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     public void refresh(Fragment refr){
