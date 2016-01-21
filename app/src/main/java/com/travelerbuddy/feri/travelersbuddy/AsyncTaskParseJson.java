@@ -1,12 +1,15 @@
 package com.travelerbuddy.feri.travelersbuddy;
 
 import android.os.AsyncTask;
+import android.support.v7.widget.RecyclerView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Klemen on 28.11.2015.
@@ -16,18 +19,23 @@ public class AsyncTaskParseJson extends AsyncTask<String, String, JSONArray> {
         void jsonProcessFinished(JSONArray output);
     }
 
-    public JsonResponse delegate;
+
+    private RecyclerViewAdapter adapter;
+    public JsonResponse callback;
     final String TAG = "AsyncTaskParseJson.java";
     private String from;
     private String to;
+    private RecyclerView mRecyclerView;
     // set your json string url here
     String yourJsonStringUrl ;
     // contacts JSONArray
 
-    public AsyncTaskParseJson(JsonResponse delegate , String from, String to) {
-        this.delegate= delegate;
+    private List feedslist;
+
+    public AsyncTaskParseJson(JsonResponse callback,  String from, String to) {
+        this.callback = callback;
         this.from = from;
-       this.to = to;
+        this.to = to;
     }
 
     @Override
@@ -70,11 +78,22 @@ public class AsyncTaskParseJson extends AsyncTask<String, String, JSONArray> {
 
     @Override
     protected void onPostExecute(JSONArray result) {
-        delegate.jsonProcessFinished(result);
+        callback.jsonProcessFinished(result);
+
+        //adapter = new RecyclerViewAdapter(context, feedslist);
+        //mRecyclerView.setAdapter(adapter);
     }
 
 
 
+    public void parseData(){
+
+        feedslist = new ArrayList();
+feedslist.add("nekakj");
+
+        }
 
 
-}
+
+
+        }

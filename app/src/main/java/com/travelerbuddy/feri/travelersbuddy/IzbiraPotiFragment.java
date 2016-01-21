@@ -3,7 +3,6 @@ package com.travelerbuddy.feri.travelersbuddy;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -11,7 +10,7 @@ import android.widget.ImageButton;
 
 import org.json.JSONArray;
 
-public class IzbiraPotiFragment extends Fragment implements AsyncTaskParseJson.JsonResponse {
+public class IzbiraPotiFragment extends Fragment  {
     ImageButton search;
     EditText from;
     EditText to;
@@ -34,13 +33,13 @@ public class IzbiraPotiFragment extends Fragment implements AsyncTaskParseJson.J
                 new AsyncTaskParseJson(new AsyncTaskParseJson.JsonResponse() {
                     @Override
                     public void jsonProcessFinished(JSONArray output) {
-                        System.out.println("konec procesa: " + output);
-
-                         getFragmentManager().beginTransaction().replace(R.id.content_frame,new PrevoziFragment()).commit();
-
+                        System.out.println("SEM V CALLBACKU PRED PREUSMERITVIJO" + output.toString());
+                        getFragmentManager().beginTransaction().replace(R.id.content_frame,new PrevoziFragment()).commit();
 
                     }
                 }, from.getText().toString(), to.getText().toString()).execute();
+
+
             }
         });
 
@@ -50,8 +49,5 @@ public class IzbiraPotiFragment extends Fragment implements AsyncTaskParseJson.J
     }
 
 
-    @Override
-    public void jsonProcessFinished(JSONArray output) {
 
-    }
 }
