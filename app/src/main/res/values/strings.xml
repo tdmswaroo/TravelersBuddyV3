@@ -6,7 +6,7 @@
     <string name="drawer_open">Odprto</string>
     <string name="drawer_close">Zaprto</string>
 
-    <string name="izbiraPoti">Choose route</string>
+    <string name="izbiraPoti">Choose trip</string>
     <string name="prevozi">Transport</string>
     <string name="hoteli">Hotels</string>
     <string name="dogodki">Events</string>
