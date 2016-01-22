@@ -3,7 +3,280 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.travelerbuddy.feri.travelersbuddy.VremeFragment">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:background="@color/colorPrimary"
+        android:orientation="vertical"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:id="@+id/textViewStopinje"
+            android:layout_height="120dp"
+            android:textSize="@dimen/textStopinje"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="50dp"
+            android:fontFamily="sans-serif-thin"
+            android:textColor="@color/textColorPrimary"
+            />
+
+        <ImageView
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_marginTop="90dp"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/slikaVremena"
+            />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp"
+            >
+
+            <TextView
+                android:layout_width="35dp"
+                android:layout_height="25dp"
+                android:textSize="@dimen/opisVremena"
+                android:id="@+id/minStopinj"
+                android:layout_marginLeft="30dp"
+                android:textColor="@color/textColorPrimary"/>
+
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="25dp"
+                android:text="/"
+                android:textSize="@dimen/opisVremena"
+                android:textColor="@color/textColorPrimary"
+                />
+
+            <TextView
+                android:layout_width="35dp"
+                android:layout_height="25dp"
+                android:textSize="@dimen/opisVremena"
+                android:id="@+id/maxStopinj"
+                android:textColor="@color/textColorPrimary"/>
 
 
 
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/opisVremena"
+            android:id="@+id/vremeOpisText"
+            android:layout_marginLeft="25dp"
+            android:textColor="@color/textColorPrimary"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            >
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="15dp"
+                android:id="@+id/vlagaIkona"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="50dp"
+                />
+
+            <TextView
+                android:layout_width="35dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="48dp"
+                android:textSize="@dimen/textPodrobniPodatkiVreme"
+                android:id="@+id/vlagaText"
+                android:textColor="@color/textColorPrimary"
+                />
+            <ImageView
+                android:layout_width="15dp"
+                android:id="@+id/hitrostVetraIkona"
+                android:layout_height="15dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="50dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="49dp"
+                android:textSize="@dimen/textPodrobniPodatkiVreme"
+                android:id="@+id/hitrostVetraText"
+                android:textColor="@color/textColorPrimary"
+                />
+
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="50dp"
+                android:id="@+id/smerVetraIkona"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="49dp"
+                android:textSize="@dimen/textPodrobniPodatkiVreme"
+                android:id="@+id/smerVetraText"
+                android:textColor="@color/textColorPrimary"
+                />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="20dp"
+                >
+
+                <TextView
+                    android:layout_width="55dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/day1"
+                    android:fontFamily="sans-serif-thin"
+                    android:textColor="@color/navigationBarColor"
+                    android:textSize="25sp"
+                    android:textStyle="bold"
+                    />
+                <TextView
+                    android:layout_width="55dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="25sp"
+                    android:fontFamily="sans-serif-thin"
+                    android:textColor="@color/navigationBarColor"
+                    android:textStyle="bold"
+                    android:id="@+id/day2"/>
+                <TextView
+                    android:layout_width="55dp"
+                    android:textSize="25sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/navigationBarColor"
+                    android:layout_marginLeft="30dp"
+                    android:fontFamily="sans-serif-thin"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/day3"/>
+                <TextView
+                    android:layout_width="55dp"
+                    android:fontFamily="sans-serif-thin"
+                    android:layout_marginLeft="30dp"
+                    android:id="@+id/day4"
+                    android:textColor="@color/navigationBarColor"
+                    android:textSize="25sp"
+                    android:textStyle="bold"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                >
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:id="@+id/napoved1"
+                    android:layout_height="50dp"
+                    />
+                <ImageView
+                    android:layout_width="50dp"
+                    android:id="@+id/napoved2"
+                    android:layout_marginLeft="30dp"
+                    android:layout_height="50dp"
+                    />
+                <ImageView
+                    android:layout_width="50dp"
+                    android:id="@+id/napoved3"
+                    android:layout_marginLeft="30dp"
+                    android:layout_height="50dp"
+                    />
+                <ImageView
+                    android:layout_width="50dp"
+                    android:id="@+id/napoved4"
+                    android:layout_marginLeft="30dp"
+                    android:layout_height="50dp"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="30dp"
+                >
+
+                <TextView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/temp1"
+                    android:textSize="25sp"
+                    android:textColor="@color/navigationBarColor"
+                    android:textStyle="bold"
+                    />
+                <TextView
+                    android:layout_width="50dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/temp2"
+                    android:textSize="25sp"
+                    android:textColor="@color/navigationBarColor"
+                    android:textStyle="bold"
+                    />
+                <TextView
+                    android:layout_width="50dp"
+                    android:textSize="25sp"
+                    android:id="@+id/temp3"
+                    android:textColor="@color/navigationBarColor"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="30dp"
+                    android:layout_height="50dp"
+                    />
+                <TextView
+                    android:layout_width="50dp"
+                    android:layout_marginLeft="30dp"
+                    android:textColor="@color/navigationBarColor"
+                    android:textSize="25sp"
+                    android:id="@+id/temp4"
+                    android:textStyle="bold"
+                    android:layout_height="50dp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
 </FrameLayout>

@@ -154,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
                 fragment = new KovcekFragment();
                 break;
             case 6:
-                //fragment = new VremeFragment();
+                fragment = new VremeFragment();
                 break;
             case 7:
                 fragment = new ValuteFragment();
