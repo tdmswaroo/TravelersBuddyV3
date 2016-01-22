@@ -3,7 +3,6 @@ package com.travelerbuddy.feri.travelersbuddy;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
@@ -24,7 +23,6 @@ import java.util.ArrayList;
 
 import Notes.Kovcek;
 import Notes.KovcekAdapter;
-import Notes.KovcekPotovanje;
 
 
 public class KovcekFragment extends Fragment {
@@ -39,9 +37,8 @@ public class KovcekFragment extends Fragment {
     DBHandlerNotes mybdNotes = null;
     private static final int DIALOG_ALERT = 10;
 
-    private ArrayList<KovcekPotovanje> kovcekLista = null;
-    DBConnector connect = new DBConnector(this.getContext());
     final DBHandlerNotes myDBNotes = new DBHandlerNotes();
+    final DBHandlerPotovanja myDBPotovanja = new DBHandlerPotovanja();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -57,29 +54,28 @@ public class KovcekFragment extends Fragment {
 
         final View view = inflater.inflate(R.layout.fragment_kovcek, container, false);
         celotni_view = view;
+        final ArrayList<Kovcek> kovcekLista = new ArrayList<>();
 
         myDBNotes.setContext(this.getContext());
         mybdNotes = myDBNotes;
+        myDBPotovanja.setContext(this.getContext());
 
+        //myDBPotovanja.insertPotovanje("Maribor","Ljubljana","22.01.2016","4 ure","Avto");
         //myDBNotes.deleteAllKovcekAndItems();
 
-        kovcekLista = new ArrayList<>();
         Cursor c = myDBNotes.getAllNotes();
 
         if (c .moveToFirst()) {
             while (c.isAfterLast() == false) {
-                KovcekPotovanje kovcek = new KovcekPotovanje();
+                Kovcek kovcek = new Kovcek();
                 kovcek.setId(Integer.parseInt(c.getString(c.getColumnIndex("IDKOVCEK"))));
                 kovcek.setNaziv(c.getString(c.getColumnIndex("naziv")));
                 kovcek.setCreatedOn(c.getString(c.getColumnIndex("createdOn")));
                 kovcek.setIdPotovanja(Integer.parseInt(c.getString(c.getColumnIndex("potovanje"))));
-                kovcek.setPotovanjeOD(c.getString(c.getColumnIndex("potovanjeOd")));
-                kovcek.setPotovanjeDO(c.getString(c.getColumnIndex("potovanjeDo")));
-                kovcek.setDatumOdhoda(c.getString(c.getColumnIndex("datumOdhoda")));
 
                 kovcekLista.add(kovcek);
 
-                Log.d("Naziv kovčka: " + kovcek.getNaziv() + ", " + kovcek.getIdPotovanja() + ", " + kovcek.getPotovanjeOD()+ " " + kovcek.getPotovanjeDO(), "GET CHECK");
+                Log.d("Naziv kovčka: " + kovcek.getNaziv() + ", " + kovcek.getIdPotovanja() + ", " + /*kovcek.getPotovanjeOD()*/ " " /*kovcek.getPotovanjeDO()*/, "GET CHECK");
 
                 c.moveToNext();
             }
@@ -93,8 +89,8 @@ public class KovcekFragment extends Fragment {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                int idKovcka = position + 1;
-                Cursor c = myDBNotes.getNoteById(idKovcka);
+                Kovcek k = kovcekLista.get(position);
+                Cursor c = myDBNotes.getNoteById(k.getId());
                 Kovcek kovcek = new Kovcek();;
                 if (c .moveToFirst()) {
                     while (c.isAfterLast() == false) {
@@ -109,12 +105,12 @@ public class KovcekFragment extends Fragment {
                 }
                 myDBNotes.dbConnector.closeConnection();
                 Intent i = new Intent(getActivity().getApplicationContext(),kovcek_items.class);
-                i.putExtra("id",String.valueOf(idKovcka));
+                i.putExtra("id",String.valueOf(k.getId()));
                 i.putExtra("nazivKovcka", kovcek.getNaziv());
                 startActivity(i);
             }
         });
-
+        refresh(this);
         return view;
     }
 
@@ -136,12 +132,11 @@ public class KovcekFragment extends Fragment {
                 dialogFragment.show(fm, "Sample Fragment");
 
 
-                Snackbar.make(celotni_view, "True on menu item!", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-                //KovcekFragment.this.refresh(new KovcekFragment());
+                //Snackbar.make(celotni_view, "True on menu item!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+
+
                 return true;
             default:
-
                 return super.onOptionsItemSelected(item);
         }
 

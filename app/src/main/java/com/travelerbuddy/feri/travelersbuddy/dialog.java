@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +28,8 @@ public class dialog extends DialogFragment {
     final DBHandlerPotovanja myDBpotovanja = new DBHandlerPotovanja();
     final static DBHandlerNotes myDBnotes = new DBHandlerNotes();
 
+    View superView;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +40,7 @@ public class dialog extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.fragment_dialog, container, false);
+        superView = rootView;
         myDBpotovanja.setContext(rootView.getContext());
 
         getDialog().setTitle("Adding a new suitcase");
@@ -129,6 +133,9 @@ public class dialog extends DialogFragment {
                             .setAction("Action", null).show();
                     //KovcekFragment.this.refresh(new KovcekFragment());
                 }
+                FragmentTransaction tx = getActivity().getSupportFragmentManager().beginTransaction();
+                tx.replace(R.id.content_frame, new KovcekFragment());
+                tx.commit();
                 dismiss();
 
             }
@@ -138,6 +145,8 @@ public class dialog extends DialogFragment {
         dismiss.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Snackbar.make(v, "Insert canceled.", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
                 dismiss();
             }
         });
