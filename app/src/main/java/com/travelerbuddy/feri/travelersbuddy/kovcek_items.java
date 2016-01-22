@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -68,10 +69,9 @@ public class kovcek_items extends AppCompatActivity {//implements android.widget
         System.out.println(idKovcka);
 
 
-        getSupportActionBar().setTitle("Add items to: " + naziv);
+        getSupportActionBar().setTitle(naziv);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-
 
 
         //*******************************************************************************************************
@@ -83,14 +83,6 @@ public class kovcek_items extends AppCompatActivity {//implements android.widget
         this.displayListView(c1);
 
         myDBNotes.dbConnector.closeConnection();
-
-        alertDialog = (Button)findViewById(R.id.dodajNoviItemButton);
-        alertDialog.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                showDialog(DIALOG_ALERT);
-            }
-        });
-
     }
 
     private void displayListView(Cursor c){
@@ -170,23 +162,28 @@ public class kovcek_items extends AppCompatActivity {//implements android.widget
         public void onClick(DialogInterface dialog, int which) {
 
             String dialog_Text = input1.getText().toString();
-
-            long res = 0;
-            try {
-                res = myDBNotes.updateItem(ID, dialog_Text);
-                if(res == 1) {
-                    Snackbar.make(findViewById(android.R.id.content), "Item updated.", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
-                }else{
-                    Snackbar.make(findViewById(android.R.id.content), "Sory something went wrong.", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
+            System.out.print(dialog_Text);
+            if (dialog_Text == null || dialog_Text.equals("")) {
+                Snackbar.make(findViewById(android.R.id.content), "Please insert some content before you try to update an item.", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            } else {
+                long res = 0;
+                try {
+                    res = myDBNotes.updateItem(ID, dialog_Text);
+                    if (res == 1) {
+                        Snackbar.make(findViewById(android.R.id.content), "Item updated.", Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).show();
+                    } else {
+                        Snackbar.make(findViewById(android.R.id.content), "Sory something went wrong.", Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).show();
+                    }
+                } catch (Exception e) {
+                    Log.d("NEKAJ JE NAROBE", "CHECK");
+                } finally {
+                    Cursor c1 = myDBNotes.getAllItemsZaKovcek(Integer.parseInt(getIntent().getStringExtra("id")));
+                    displayListView(c1);
+                    myDBNotes.dbConnector.closeConnection();
                 }
-            } catch (Exception e) {
-                Log.d("NEKAJ JE NAROBE", "CHECK");
-            }finally {
-                Cursor c1 = myDBNotes.getAllItemsZaKovcek(Integer.parseInt(getIntent().getStringExtra("id")));
-                displayListView(c1);
-                myDBNotes.dbConnector.closeConnection();
             }
         }
     }
@@ -204,31 +201,46 @@ public class kovcek_items extends AppCompatActivity {//implements android.widget
         public void onClick(DialogInterface dialog, int which) {
 
             String dialog_Text = input.getText().toString();
-
-            boolean res = false;
-            try {
-                res = myDBNotes.insertNovItem(dialog_Text, "false", Integer.parseInt(getIntent().getStringExtra("id")));
-                if(res == true) {
-                    Snackbar.make(findViewById(android.R.id.content), "Item inserted.", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
-                }else{
-                    Snackbar.make(findViewById(android.R.id.content), "Sory something went wrong.", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
+            System.out.print(dialog_Text);
+            if (dialog_Text == null || dialog_Text.equals("")) {
+                Snackbar.make(findViewById(android.R.id.content), "Please insert some content before you try to insert an item.", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            } else {
+                boolean res = false;
+                try {
+                    res = myDBNotes.insertNovItem(dialog_Text, "false", Integer.parseInt(getIntent().getStringExtra("id")));
+                    if (res == true) {
+                        Snackbar.make(findViewById(android.R.id.content), "Item inserted.", Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).show();
+                    } else {
+                        Snackbar.make(findViewById(android.R.id.content), "Sory something went wrong.", Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).show();
+                    }
+                } catch (Exception e) {
+                    Log.d("NEKAJ JE NAROBE", "CHECK");
+                } finally {
+                    Cursor c1 = myDBNotes.getAllItemsZaKovcek(Integer.parseInt(getIntent().getStringExtra("id")));
+                    displayListView(c1);
+                    myDBNotes.dbConnector.closeConnection();
                 }
-            } catch (Exception e) {
-                Log.d("NEKAJ JE NAROBE", "CHECK");
-            }finally {
-                Cursor c1 = myDBNotes.getAllItemsZaKovcek(Integer.parseInt(getIntent().getStringExtra("id")));
-                displayListView(c1);
-                myDBNotes.dbConnector.closeConnection();
             }
         }
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.menu_itemdetail, menu);
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem menuItem) {
-        if (menuItem.getItemId() == android.R.id.home) {
+        int id = menuItem.getItemId();
+
+        if (id == android.R.id.home) {
             onBackPressed();
+        }else if(id == R.id.action_add){
+            showDialog(DIALOG_ALERT);
         }
         return super.onOptionsItemSelected(menuItem);
     }

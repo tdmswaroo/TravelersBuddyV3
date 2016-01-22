@@ -94,7 +94,7 @@ public class DBHandlerNotes extends AppCompatActivity {
 
             dbConnector.openConnection();
             mydb = dbConnector.getDB();
-            result = mydb.rawQuery("SELECT * FROM kovcek_table k, potovanje_table p",null);//morem sql tak napisat da bo vračal še število itemov, ki so v kovčku :)
+            result = mydb.rawQuery("SELECT * FROM kovcek_table",null);//morem sql tak napisat da bo vračal še število itemov, ki so v kovčku :)
 
         } catch (Exception e) {
             e.printStackTrace();
