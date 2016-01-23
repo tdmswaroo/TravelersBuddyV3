@@ -54,4 +54,17 @@
     <string name="title_activity_dogodek_podrobno">DogodekPodrobno</string>
     <string name="title_activity_test">test</string>
 
+    <string-array name="casPotovanjaArray">
+        <item>MIN</item>
+        <item>HOURS</item>
+        <item>DAYS</item>
+    </string-array>
+
+    <string-array name="transportationMethod">
+        <item>CAR</item>
+        <item>BUS</item>
+        <item>TRAIN</item>
+        <item>PLANE</item>
+    </string-array>
+
 </resources>

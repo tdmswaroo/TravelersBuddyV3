@@ -136,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
         switch(position){
 
             case 0:
-                //fragment = new MojaPotovanjaFragment();
+                fragment = new MojaPotovanjaFragment();
                 break;
             case 1:
                 fragment = new IzbiraPotiFragment();
