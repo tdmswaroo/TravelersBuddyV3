@@ -9,26 +9,51 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/napisPoisciDogodek"
+            android:layout_width="150dp"
+            android:layout_height="60dp"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/navigationBarColor"
+            android:text="Find event!"
+            android:layout_marginLeft="105dp"
+            android:layout_marginTop="60dp"
+            />
 
         <EditText
             android:id="@+id/vnosLokacijeDogodkov"
             android:layout_width="150dp"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="10dp"
             android:layout_height="50dp"
             android:layout_marginLeft="105dp"
-            android:hint="Lokacija"
+            android:hint="Location"
+            android:singleLine="true"
+            android:nextFocusDown="@+id/mesci"
             android:imeOptions="actionNext">
         <requestFocus />
         </EditText>
 
         <Spinner
             android:id="@+id/mesci"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:layout_width="150dp"
             android:layout_marginLeft="105dp"
             android:layout_marginTop="20dp"
             android:background="@color/colorPrimary"
             android:layout_height="50dp"
             android:entries="@array/mesci"
+            />
+
+        <Spinner
+            android:id="@+id/kategorija"
+            android:layout_width="150dp"
+            android:layout_marginLeft="105dp"
+            android:layout_marginTop="40dp"
+            android:background="@color/colorPrimary"
+            android:layout_height="50dp"
+            android:entries="@array/kategorija"
             />
 
         <Button
@@ -38,7 +63,7 @@
             android:layout_height="50dp"
             android:layout_marginLeft="105dp"
             android:background="@color/colorPrimary"
-            android:text="Prikaži"
+            android:text="Show"
             />
 
     </LinearLayout>

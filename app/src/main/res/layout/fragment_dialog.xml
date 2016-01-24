@@ -1,0 +1,77 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:padding="20dp"
+    tools:context="com.travelerbuddy.feri.travelersbuddy.KovcekFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Adding a new suitcase"
+            android:textSize="20dp" />
+
+        <EditText
+            android:id="@+id/typeNameOfSuitcase"
+            android:hint="Type the name of a suitcase"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16dp"
+            android:layout_marginLeft="6dp"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+
+    <Spinner
+        android:id="@+id/potovanja"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:layout_width="185dp"
+        android:background="@color/colorPrimary"
+        android:layout_height="50dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center_vertical"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp">
+
+        <Button
+            android:id="@+id/dismiss"
+            android:layout_width="wrap_content"
+            android:layout_height="43dp"
+            android:text="Cancel"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_alignTop="@+id/insert_suitcase"
+            android:layout_toStartOf="@+id/insert_suitcase"
+            android:background="@color/colorPrimary"/>
+
+        <Button
+            android:id="@+id/insert_suitcase"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Insert"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_below="@+id/potovanja"
+            android:layout_alignEnd="@+id/potovanja"
+            android:background="@color/colorPrimary"/>
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>

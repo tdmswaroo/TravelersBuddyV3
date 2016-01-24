@@ -74,4 +74,23 @@ public class DBHandlerPotovanja extends AppCompatActivity {
         return result;
     }
 
+    public Cursor getTripById(int id){
+        dbConnector = new DBConnector(this.getContext());
+        Cursor result = null;
+
+        try {
+
+            dbConnector.openConnection();
+            mydb = dbConnector.getDB();
+            result = mydb.rawQuery("SELECT * FROM potovanje_table WHERE ID="+id,null);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            //dbConnector.closeConnection();
+        }
+
+        return result;
+    }
+
 }
