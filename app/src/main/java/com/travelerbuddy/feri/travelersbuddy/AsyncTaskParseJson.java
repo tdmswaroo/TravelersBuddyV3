@@ -2,21 +2,22 @@ package com.travelerbuddy.feri.travelersbuddy;
 
 import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import android.util.Log;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
+
+import Parsing.Place;
+import Parsing.Response;
+import Parsing.Route;
+import Parsing.Segment;
 
 /**
  * Created by Klemen on 28.11.2015.
  */
-public class AsyncTaskParseJson extends AsyncTask<String, String, JSONArray> {
+public class AsyncTaskParseJson extends AsyncTask<String, String, Response> {
     public interface JsonResponse {
-        void jsonProcessFinished(JSONArray output);
+        void jsonProcessFinished(Response output);
     }
 
 
@@ -45,8 +46,8 @@ public class AsyncTaskParseJson extends AsyncTask<String, String, JSONArray> {
     }
 
     @Override
-    protected JSONArray doInBackground(String... arg0) {
-        JSONArray data = null;
+    protected Response doInBackground(String... arg0) {
+        Response response = null;
         try {
 
             // instantiate our json parser
@@ -55,43 +56,84 @@ public class AsyncTaskParseJson extends AsyncTask<String, String, JSONArray> {
             // get json string from url
 
 
-            JSONObject json = jParser.getJSONFromUrl(yourJsonStringUrl);
-            data = json.getJSONArray("places");
-            System.out.println("data: "+data.toString());
+            //JSONObject json = jParser.getJSONFromUrl(yourJsonStringUrl);
+            response = jParser.getJSONFromUrl(yourJsonStringUrl);
+            //data = json.getJSONArray("places");
 
+
+            prinData(response);
 
 
             // get the array of current weather
 
-        } catch (JSONException e) {
 
-            e.printStackTrace();
         } catch (IOException e) {
 
             e.printStackTrace();
         }
 
-        return data;
+        return response;
     }
 
+    private void prinData(Response response) {
+        System.out.println("___________IZPIS_______________________: "+response.toString());
+
+        System.out.println("PLACES: "+response.toString());
+
+        for(Place p:response.getPlaces()){
+            Log.d("places", "CountryCode: " + p.getCountryCode());
+            Log.d("places", "Kind: "+p.getKind());
+            Log.d("places", "LongName: "+p.getLongName());
+            Log.d("places", "Name: "+p.getName());
+            Log.d("places", "Pos: "+p.getPos());
+            Log.d("places", "RegionCode: "+p.getRegionCode());
+
+        }
+
+        System.out.println("ROUTES: "+response.toString());
+
+        for(Route p:response.getRoutes()){
+            Log.d("routes", "Name: "+p.getName());
+            Log.d("routes", "Duration: " + p.getDuration());
+
+
+            Log.d("routes", "INDICATIVEPRICE");
+            Log.d("routes", p.getIndicativePrice().getCurrency());
+            Log.d("routes", "Price: "+p.getIndicativePrice().getPrice());
+            Log.d("routes", "IsFreeTransfer: "+p.getIndicativePrice().isFreeTransfer());
+
+
+
+            Log.d("routes", "SEGMENTS");
+            for (Segment s: p.getSegments()) {
+                Log.d("routes", s.getIndicativePrice().toString());
+                Log.d("routes", "Duration: "+s.getDuration());
+                Log.d("routes", "Kind: "+s.getKind());
+                Log.d("routes", "sName "+s.getsName());
+                Log.d("routes", "tName: "+s.gettName());
+                Log.d("routes", "URL"+s.getUrl());
+
+
+            }
+
+
+
+
+        }
+    }
 
 
     @Override
-    protected void onPostExecute(JSONArray result) {
+    protected void onPostExecute(Response result) {
         callback.jsonProcessFinished(result);
 
-        //adapter = new RecyclerViewAdapter(context, feedslist);
-        //mRecyclerView.setAdapter(adapter);
+
     }
 
 
 
-    public void parseData(){
 
-        feedslist = new ArrayList();
-feedslist.add("nekakj");
 
-        }
 
 
 

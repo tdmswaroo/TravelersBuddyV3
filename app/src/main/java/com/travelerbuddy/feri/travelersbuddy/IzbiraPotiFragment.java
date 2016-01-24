@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
-import org.json.JSONArray;
+import Parsing.Response;
 
 public class IzbiraPotiFragment extends Fragment  {
     ImageButton search;
@@ -32,9 +32,9 @@ public class IzbiraPotiFragment extends Fragment  {
 
                 new AsyncTaskParseJson(new AsyncTaskParseJson.JsonResponse() {
                     @Override
-                    public void jsonProcessFinished(JSONArray output) {
+                    public void jsonProcessFinished(Response output) {
                         System.out.println("SEM V CALLBACKU PRED PREUSMERITVIJO" + output.toString());
-                        getFragmentManager().beginTransaction().replace(R.id.content_frame,new PrevoziFragment()).commit();
+                        getFragmentManager().beginTransaction().replace(R.id.content_frame, PrevoziFragment.newInstance(output)).addToBackStack("tag").commit();
 
                     }
                 }, from.getText().toString(), to.getText().toString()).execute();
