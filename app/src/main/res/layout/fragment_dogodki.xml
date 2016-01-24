@@ -44,6 +44,7 @@
             android:background="@color/colorPrimary"
             android:layout_height="50dp"
             android:entries="@array/mesci"
+            android:nextFocusDown="@+id/kategorija"
             />
 
         <Spinner

@@ -73,7 +73,7 @@ public class DogodkiFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getActivity().getApplicationContext(),DogodkiActivity.class);
-                i.putExtra("lokacija",vnosLokacije.getText().toString());
+                i.putExtra("lokacija",vnosLokacije.getText().toString().replace(" ",""));
                 i.putExtra("mesec",mesci.getSelectedItem().toString());
                 i.putExtra("kat",izbranaKategorija);
                 startActivity(i);

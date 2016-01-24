@@ -1,12 +1,15 @@
 package Notes;
 
 import android.content.Context;
+import android.database.Cursor;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.travelerbuddy.feri.travelersbuddy.DBHandlerPotovanja;
 import com.travelerbuddy.feri.travelersbuddy.R;
 
 import java.util.ArrayList;
@@ -18,7 +21,7 @@ import Pomozni.ListViewAdapter;
  */
 public class KovcekAdapter  extends ListViewAdapter {
 
-    public KovcekAdapter(Context context, ArrayList<KovcekPotovanje> list) {
+    public KovcekAdapter(Context context, ArrayList<Kovcek> list) {
         super(context, list);
     }
 
@@ -41,10 +44,32 @@ public class KovcekAdapter  extends ListViewAdapter {
         }
 
         ViewHolder viewHolder = (ViewHolder)view.getTag();
-        KovcekPotovanje kovcek = (KovcekPotovanje) getTypedItem(position);
+        Kovcek kovcek = (Kovcek) getTypedItem(position);
         viewHolder.textNazivKovcka.setText(kovcek.getNaziv());
-        viewHolder.textPotovanjeDo.setText(kovcek.getPotovanjeOD()+" - "+kovcek.getPotovanjeDO());
-        viewHolder.textDatumPotovanja.setText(kovcek.getDatumOdhoda());
+
+        DBHandlerPotovanja pot = new DBHandlerPotovanja();
+        pot.setContext(super.getContext());
+
+        Cursor c = pot.getTripById(kovcek.getIdPotovanja());
+        Potovanje p = null;
+        if (c .moveToFirst()) {
+            while (c.isAfterLast() == false) {
+                p = new Potovanje();
+                p.setId(Integer.parseInt(c.getString(c.getColumnIndex("ID"))));
+                p.setPotovanjeOD(c.getString(c.getColumnIndex("potovanjeOd")));
+                p.setPotovanjeDO(c.getString(c.getColumnIndex("potovanjeDo")));
+                p.setDatumOdhoda(c.getString(c.getColumnIndex("datumOdhoda")));
+                p.setCasPotovanja(c.getString(c.getColumnIndex("casPotovanja")));
+                p.setTipPrevoza(c.getString(c.getColumnIndex("tipPrevoza")));
+
+                Log.d("Naziv kovčka: " + p, "GET CHECK");
+
+                c.moveToNext();
+            }
+        }
+
+        viewHolder.textPotovanjeDo.setText(p.getPotovanjeOD()+" - "+p.getPotovanjeDO());
+        viewHolder.textDatumPotovanja.setText(p.getDatumOdhoda());
 
         return view;
     }

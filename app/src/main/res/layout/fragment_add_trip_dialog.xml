@@ -1,0 +1,148 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:padding="20dp"
+    tools:context="com.travelerbuddy.feri.travelersbuddy.add_trip_dialog">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="45dp"
+            android:text="Adding a new trip"
+            android:textSize="20dp" />
+
+        <EditText
+            android:id="@+id/typeTripFrom"
+            android:hint="Travelling from"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:textSize="16dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+
+        <EditText
+            android:id="@+id/typeTripTo"
+            android:hint="Travelling to"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:textSize="16dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/timeOfTravelText"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="20dp"
+                android:hint="Time of travel"
+                android:textSize="14dp"/>
+            <Spinner
+                android:id="@+id/casPrevozaArray"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:layout_width="100dp"
+                android:background="@color/colorPrimary"
+                android:layout_height="43dp"
+                android:entries="@array/casPotovanjaArray"
+                android:layout_marginLeft="120dp"
+                android:layout_marginTop="10dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/editTextDate"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="20dp"
+                android:hint=""
+                android:textSize="14dp"
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"/>
+
+            <Button
+                android:id="@+id/buttonSetDate"
+                android:layout_width="100dp"
+                android:layout_height="43dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="120dp"
+                android:text="Choose date"
+                android:background="@color/colorPrimary" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tipPrevozaView"
+                android:layout_width="100dp"
+                android:layout_height="43dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="12dp"
+                android:text="Transportation method:"
+                android:textSize="15dp" />
+
+            <Spinner
+                android:id="@+id/tipPrevozaArray"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:layout_width="100dp"
+                android:background="@color/colorPrimary"
+                android:layout_height="43dp"
+                android:entries="@array/transportationMethod"
+                android:layout_marginLeft="120dp"
+                android:layout_marginTop="10dp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/dismiss"
+                android:layout_width="100dp"
+                android:layout_height="43dp"
+                android:text="Cancel"
+                android:layout_gravity="center_horizontal|bottom"
+                android:background="@color/colorPrimary"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"/>
+
+            <Button
+                android:id="@+id/insert_trip"
+                android:layout_width="100dp"
+                android:layout_height="43dp"
+                android:text="Insert"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="120dp"
+                android:background="@color/colorPrimary"/>
+
+
+        </RelativeLayout>
+    </LinearLayout>
+
+</FrameLayout>

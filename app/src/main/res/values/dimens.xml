@@ -26,6 +26,9 @@
 
     <dimen name="textImeDogodka">18sp</dimen>
     <dimen name="textLokDogodka">16sp</dimen>
+    <dimen name="textStopinje">110sp</dimen>
+    <dimen name="textPodrobniPodatkiVreme">15sp</dimen>
+    <dimen name="opisVremena">20sp</dimen>
 
 
 </resources>

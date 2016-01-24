@@ -13,8 +13,9 @@
     <string name="vreme">Weather</string>
     <string name="kovcek">Suitcase</string>
     <string name="valuta">Currencies</string>
-    <string name="potov">Last trips</string>
+    <string name="potov">My trips</string>
 
+    <string name="searchCityText">Search weather for city</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -52,5 +53,18 @@
     <string name="title_activity_kovcek_items">kovcek_items</string>
     <string name="title_activity_dogodek_podrobno">DogodekPodrobno</string>
     <string name="title_activity_test">test</string>
+
+    <string-array name="casPotovanjaArray">
+        <item>MIN</item>
+        <item>HOURS</item>
+        <item>DAYS</item>
+    </string-array>
+
+    <string-array name="transportationMethod">
+        <item>CAR</item>
+        <item>BUS</item>
+        <item>TRAIN</item>
+        <item>PLANE</item>
+    </string-array>
 
 </resources>

@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         listview = (ListView)findViewById(android.R.id.list);
 
         List<SideMenuItem> items = new ArrayList<>();
+        items.add(new SideMenuItem(R.string.potov, R.mipmap.potov));
         items.add(new SideMenuItem(R.string.izbiraPoti, R.mipmap.ic_action));
         items.add(new SideMenuItem(R.string.prevozi, R.mipmap.car));
         items.add(new SideMenuItem(R.string.hoteli,R.mipmap.hoteli));
@@ -50,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
         items.add(new SideMenuItem(R.string.kovcek, R.mipmap.kovcek));
         items.add(new SideMenuItem(R.string.vreme, R.mipmap.vreme));
         items.add(new SideMenuItem(R.string.valuta, R.mipmap.valuta));
-        items.add(new SideMenuItem(R.string.potov, R.mipmap.potov));
 
 
 
@@ -136,28 +136,28 @@ public class MainActivity extends AppCompatActivity {
         switch(position){
 
             case 0:
-                fragment = new IzbiraPotiFragment();
+                fragment = new MojaPotovanjaFragment();
                 break;
             case 1:
-                //fragment = new PrevoziFragment();
+                fragment = new IzbiraPotiFragment();
                 break;
             case 2:
-                fragment = new HoteliFragment();
+                //fragment = new PrevoziFragment();
                 break;
             case 3:
-                fragment = new DogodkiFragment();
+                fragment = new HoteliFragment();
                 break;
             case 4:
-                fragment = new KovcekFragment();
+                fragment = new DogodkiFragment();
                 break;
             case 5:
-                //fragment = new VremeFragment();
+                fragment = new KovcekFragment();
                 break;
             case 6:
-                fragment = new ValuteFragment();
+                fragment = new VremeFragment();
                 break;
             case 7:
-                //fragment = new MojaPotovanjaFragment();
+                fragment = new ValuteFragment();
                 break;
             default:
                 fragment = new IzbiraPotiFragment();
