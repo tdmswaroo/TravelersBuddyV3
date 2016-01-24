@@ -70,5 +70,5 @@ public class Potovanje {
         this.tipPrevoza = tipPrevoza;
     }
 
-    public String toString(){return this.getId() + " " + this.getPotovanjeOD()+" - "+this.getPotovanjeDO();}
+    public String toString(){return this.getPotovanjeOD()+" - "+this.getPotovanjeDO();}
 }

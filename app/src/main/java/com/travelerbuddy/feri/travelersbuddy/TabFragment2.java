@@ -48,7 +48,7 @@ public class TabFragment2 extends Fragment {
                 p = new Potovanje();
 
                 String string = c.getString(c.getColumnIndex("datumOdhoda"));
-                String today = day +"."+ month +"."+ year;
+                String today = day +"."+ (month+1) +"."+ year;
                 DateFormat format = new SimpleDateFormat("dd.MM.yyyy");
                 Date date = null;
                 Date today_date = null;

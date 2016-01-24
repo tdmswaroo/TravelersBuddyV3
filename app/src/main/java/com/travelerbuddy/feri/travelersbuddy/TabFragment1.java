@@ -2,6 +2,7 @@ package com.travelerbuddy.feri.travelersbuddy;
 
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -50,7 +51,8 @@ public class TabFragment1 extends Fragment {
                 p = new Potovanje();
 
                 String string = c.getString(c.getColumnIndex("datumOdhoda"));
-                String today = day +"."+ month +"."+ year;
+                String today = day +"."+ (month+1) +"."+ year;
+                System.out.print("String danasnji datum: "+today);
                 DateFormat format = new SimpleDateFormat("dd.MM.yyyy");
                 Date date = null;
                 Date today_date = null;
@@ -60,8 +62,8 @@ public class TabFragment1 extends Fragment {
                 }catch(Exception e){
                     e.printStackTrace();
                 }
-                System.out.println(date);
-                System.out.println(today_date);
+                System.out.println("Datum iz baze: "+date);
+                System.out.println("Danasnji datum: "+today_date);
 
                 //int res = date.compareTo(today_date);
                 if(date.after(today_date)) {//morem zrihtat še da se pravilno izpisujejo glede na datum
@@ -74,7 +76,7 @@ public class TabFragment1 extends Fragment {
                     potovanjaLista.add(p);
                 }
 
-                Log.d("Potovanje: " + p, "GET CHECK");
+                Log.d("Potovanje: " + p.getPotovanjeOD() + " - " + p.getPotovanjeDO(), "GET CHECK");
 
                 c.moveToNext();
             }
