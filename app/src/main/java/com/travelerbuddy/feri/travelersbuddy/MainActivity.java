@@ -184,11 +184,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
-        web = (WebView) findViewById(R.id.webView);
+/*
+        android.app.Fragment f = getFragmentManager().findFragmentById(R.id.content_frame);
+        if (f instanceof HoteliFragment)
+            web = (WebView) findViewById(R.id.webView);
 
         if (web.copyBackForwardList().getCurrentIndex() > 0) {
             web.goBack();
-        }else if(getFragmentManager().getBackStackEntryCount() > 0) {
+        }
+*/
+        if(getFragmentManager().getBackStackEntryCount() > 0) {
             getFragmentManager().popBackStack();
         } else {
             super.onBackPressed();

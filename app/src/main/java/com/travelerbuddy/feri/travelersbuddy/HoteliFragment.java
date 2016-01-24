@@ -16,6 +16,7 @@ import android.webkit.WebViewClient;
 import android.widget.Button;
 
 
+
 public class HoteliFragment extends Fragment {
 
     private WebView webView;
