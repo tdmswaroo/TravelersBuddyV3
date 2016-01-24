@@ -268,7 +268,7 @@
                     />
                 <TextView
                     android:layout_width="50dp"
-                    android:layout_marginLeft="30dp"
+                    android:layout_marginLeft="26dp"
                     android:textColor="@color/navigationBarColor"
                     android:textSize="25sp"
                     android:id="@+id/temp4"

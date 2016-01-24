@@ -388,7 +388,7 @@ public class VremeFragment extends Fragment {
                 return "Tue";
             case "sre.":
                 return "Wed";
-            case "cet.":
+            case "čet.":
                 return "Thu";
             case "pet.":
                 return "Fri";
