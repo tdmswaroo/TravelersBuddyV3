@@ -228,8 +228,8 @@ public class ValuteFragment extends Fragment {
         }
     }
 
-    public String spremeniValuto(int position){
-        switch(position) {
+    public String spremeniValuto(int position) {
+        switch (position) {
 
             case 0:
                 return "EUR";

@@ -184,22 +184,18 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
-        if (getFragmentManager().getBackStackEntryCount() > 0) {
+        web = (WebView) findViewById(R.id.webView);
+
+        if (web.copyBackForwardList().getCurrentIndex() > 0) {
+            web.goBack();
+        }else if(getFragmentManager().getBackStackEntryCount() > 0) {
             getFragmentManager().popBackStack();
         } else {
             super.onBackPressed();
         }
 
-       /*PREPISANO - zakaj je tu webview?
-        web = (WebView) findViewById(R.id.webView);
 
-        if (web.copyBackForwardList().getCurrentIndex() > 0) {
-            web.goBack();
-        }
-        else {
-            // Your exit alert code, or alternatively line below to finish
-            super.onBackPressed(); // finishes activity
-        }*/
+
     }
 
 }
