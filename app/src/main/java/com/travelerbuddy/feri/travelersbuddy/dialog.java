@@ -82,12 +82,12 @@ public class dialog extends DialogFragment {
 
                 myDBnotes.setContext(v.getContext());
 
-                Object item1 = sp.getSelectedItem();
+                Potovanje item1 = (Potovanje) sp.getSelectedItem();
                 System.out.println(item1);
 
-                int id = Integer.parseInt(item1.toString().substring(0,1));
+                //int id = Integer.parseInt(item1.toString().substring(0,1));
 
-                Cursor c1 = myDBpotovanja.getTripById(id);
+                Cursor c1 = myDBpotovanja.getTripById(item1.getId());
                 Potovanje p = new Potovanje();
                 if (c1 .moveToFirst()) {
                     while (c1.isAfterLast() == false) {

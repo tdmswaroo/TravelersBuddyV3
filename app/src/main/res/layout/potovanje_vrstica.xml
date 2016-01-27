@@ -78,7 +78,7 @@
                 android:layout_width="20dp"
                 android:src="@mipmap/timer_icon"
                 android:layout_height="20dp"
-                android:layout_marginLeft="75dp"
+                android:layout_marginLeft="80dp"
                 />
 
             <TextView
@@ -87,7 +87,7 @@
                 android:layout_height="20dp"
                 android:textSize="15dp"
                 android:text="Cas prevoza"
-                android:layout_marginLeft="100dp"
+                android:layout_marginLeft="105dp"
                 />
         </RelativeLayout>
 
