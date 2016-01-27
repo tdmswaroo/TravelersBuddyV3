@@ -45,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
         List<SideMenuItem> items = new ArrayList<>();
         items.add(new SideMenuItem(R.string.potov, R.mipmap.potov));
         items.add(new SideMenuItem(R.string.izbiraPoti, R.mipmap.ic_action));
-        items.add(new SideMenuItem(R.string.prevozi, R.mipmap.car));
         items.add(new SideMenuItem(R.string.hoteli,R.mipmap.hoteli));
         items.add(new SideMenuItem(R.string.dogodki, R.mipmap.dogodki));
         items.add(new SideMenuItem(R.string.kovcek, R.mipmap.kovcek));
@@ -145,21 +144,18 @@ public class MainActivity extends AppCompatActivity {
                 fragment = new IzbiraPotiFragment();
                 break;
             case 2:
-                //fragment = new PrevoziFragment();
-                break;
-            case 3:
                 fragment = new HoteliFragment();
                 break;
-            case 4:
+            case 3:
                 fragment = new DogodkiFragment();
                 break;
-            case 5:
+            case 4:
                 fragment = new KovcekFragment();
                 break;
-            case 6:
+            case 5:
                 fragment = new VremeFragment();
                 break;
-            case 7:
+            case 6:
                 fragment = new ValuteFragment();
                 break;
             default:
