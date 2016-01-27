@@ -7,15 +7,15 @@
 
     <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="180dp"
+        android:layout_height="200dp"
         >
 
         <RelativeLayout
 
             android:layout_width="match_parent"
-            android:layout_height="180dp"
+            android:layout_height="200dp"
             android:padding="6dp"
-            android:background="#009999"
+            android:background="#ffb65d"
             android:animationCache="false">
 
 
@@ -26,12 +26,12 @@
                 android:id="@+id/sName"
                 android:autoText="false"
                 android:text="Start Location"
-                android:textColor="#FF9F00"
+                android:textColor="#009999"
                 android:textSize="23dp"
                 android:textStyle="bold"
                 android:singleLine="true"
                 android:layout_alignParentTop="true"
-                android:layout_alignStart="@+id/duration" />
+                />
 
             <TextView
                 android:layout_width="match_parent"
@@ -40,7 +40,6 @@
                 android:textIsSelectable="false"
                 android:text="735 USD"
                 android:textSize="18dp"
-                android:textColor="#ffffff"
                 android:layout_above="@+id/price"
                 android:layout_alignParentStart="true" />
             <TextView
@@ -51,7 +50,6 @@
                 android:layout_gravity="right"
                 android:textSize="18dp"
                 android:tag="700 USD"
-                android:textColor="#ffffff"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentStart="true" />
 
@@ -61,11 +59,11 @@
                 android:id="@+id/tName"
                 android:autoText="false"
                 android:text="Target Location"
-                android:textColor="#FF9F00"
+                android:textColor="#009999"
                 android:textSize="23dp"
                 android:textStyle="bold"
                 android:singleLine="true"
-                android:layout_below="@+id/sName"
+                android:layout_above="@+id/kind"
                 android:layout_alignParentStart="true" />
 
             <TextView
@@ -74,8 +72,9 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Kind"
                 android:id="@+id/kind"
-                android:layout_below="@+id/tName"
+                android:layout_above="@+id/url"
                 android:layout_alignParentStart="true" />
+
 
             <TextView
                 android:layout_width="wrap_content"
@@ -83,11 +82,30 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="www.url.com/povezava_na_vozni_red"
                 android:id="@+id/url"
-                android:layout_below="@+id/kind"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true"
                 android:autoLink="web"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:layout_above="@+id/duration"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView2"
+                android:layout_alignParentStart="true"
+                android:src="@drawable/arrow"
+                android:layout_below="@+id/sName"
+                android:layout_above="@+id/tName"
+                android:layout_alignEnd="@+id/kind" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/image"
+
+                android:layout_alignTop="@+id/sName"
+                android:layout_alignParentEnd="true" />
+
         </RelativeLayout>
 
     </android.support.v7.widget.CardView>

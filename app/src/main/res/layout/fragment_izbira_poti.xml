@@ -37,8 +37,7 @@
             android:layout_marginTop="41dp"
             android:layout_below="@+id/imageView"
             android:layout_alignStart="@+id/imageView"
-            android:layout_alignEnd="@+id/imageView"
-            android:text="ljubljana" />
+            android:layout_alignEnd="@+id/imageView" />
 
         <EditText
             android:layout_width="wrap_content"
@@ -52,8 +51,7 @@
             android:textSize="25sp"
             android:layout_below="@+id/editTextFrom"
             android:layout_alignStart="@+id/editTextFrom"
-            android:layout_alignEnd="@+id/imageView"
-            android:text="berlin" />
+            android:layout_alignEnd="@+id/imageView" />
 
         <ImageButton
             android:id="@+id/search_orange_button"

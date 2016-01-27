@@ -22,7 +22,6 @@ public class IzbiraPotiFragment extends Fragment  {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_izbira_poti, container, false);
-        System.out.println("POGANJAM ASYNCTASK");
         from = (EditText) view.findViewById(R.id.editTextFrom);
         to = (EditText) view.findViewById(R.id.editTextTo);
         search = (ImageButton)  view.findViewById(R.id.search_orange_button);
@@ -33,7 +32,7 @@ public class IzbiraPotiFragment extends Fragment  {
                 new AsyncTaskParseJson(new AsyncTaskParseJson.JsonResponse() {
                     @Override
                     public void jsonProcessFinished(Response output) {
-                        System.out.println("SEM V CALLBACKU PRED PREUSMERITVIJO" + output.toString());
+                        System.out.println(output.toString());
                         getFragmentManager().beginTransaction().replace(R.id.content_frame, PrevoziFragment.newInstance(output)).addToBackStack("tag").commit();
 
                     }

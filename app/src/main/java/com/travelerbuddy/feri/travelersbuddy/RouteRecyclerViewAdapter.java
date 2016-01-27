@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -66,6 +67,19 @@ public class RouteRecyclerViewAdapter  extends RecyclerView.Adapter<RouteRecycle
             holder.price.setText(String.format("%s",p)+" "+segment.getIndicativePrice().getCurrency());
 
 
+        if(segment.getKind().equals("bus")){
+            holder.slika.setImageResource(R.drawable.bus);
+        }else if(segment.getKind().equals("train")){
+            holder.slika.setImageResource(R.drawable.train);
+        }else if(segment.getKind().equals("car")){
+            holder.slika.setImageResource(R.drawable.car);
+        }else if(segment.getKind().equals("plane")){
+            holder.slika.setImageResource(R.drawable.plane);
+        }else if(segment.getKind().equals("taxi")){
+            holder.slika.setImageResource(R.drawable.car);
+        }
+
+
 
     }
 
@@ -88,11 +102,13 @@ public class RouteRecyclerViewAdapter  extends RecyclerView.Adapter<RouteRecycle
         protected TextView tName;
         protected TextView duration;
         protected TextView price;
+        protected ImageView slika;
 
 
         public CustomRouteViewHolder(View view) {
             super(view);
             view.setOnClickListener(this);
+            this.slika = (ImageView) view.findViewById(R.id.image);
             this.url = (TextView) view.findViewById(R.id.url);
             this.kind = (TextView) view.findViewById(R.id.kind);
             this.sName = (TextView) view.findViewById(R.id.sName);

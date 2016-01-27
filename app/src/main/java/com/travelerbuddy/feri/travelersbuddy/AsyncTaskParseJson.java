@@ -41,6 +41,9 @@ public class AsyncTaskParseJson extends AsyncTask<String, String, Response> {
 
     @Override
     protected void onPreExecute() {
+
+        from = from.replaceAll("\\s+","_");
+        to = to.replaceAll("\\s+","_");
         yourJsonStringUrl = "http://free.rome2rio.com/api/1.2/json/Search?key=eTflvQZt&oName="+from+"&dName="+to;
 
     }
@@ -95,12 +98,6 @@ public class AsyncTaskParseJson extends AsyncTask<String, String, Response> {
         for(Route p:response.getRoutes()){
             Log.d("routes", "Name: "+p.getName());
             Log.d("routes", "Duration: " + p.getDuration());
-
-
-            Log.d("routes", "INDICATIVEPRICE");
-            Log.d("routes", p.getIndicativePrice().getCurrency());
-            Log.d("routes", "Price: "+p.getIndicativePrice().getPrice());
-            Log.d("routes", "IsFreeTransfer: "+p.getIndicativePrice().isFreeTransfer());
 
 
 
